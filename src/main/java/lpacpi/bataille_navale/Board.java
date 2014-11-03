@@ -10,14 +10,14 @@ public class Board {
 	public static int CASE_DANS_EAU=3;
 	public static int CASE_TOUCHE=4;
 
-	public void Board()	{
+	public Board()	{
 		for(int i=0; i<DIMENSION;i++){
 			for(int j=0; i<DIMENSION;j++){
 				plateau[i][j] = CASE_EAU;
 			}
 		}
 	}
-	public void placerBateau(int coordonneeX,int coordonneeY,Bateau bateau,int sens)
+	public void placerBateau(int coordonneeX,int coordonneeY,Bateau bateau,int sens) throws Exception
 	{
 		if(sens==SENS_HORIZONTAL){
 			if(coordonneeX+bateau.GetTaille()<DIMENSION) {
