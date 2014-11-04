@@ -74,4 +74,5 @@ public class Board {
 		ret += " ------------------- ";
 		return ret;
 	}
+	
 }

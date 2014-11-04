@@ -64,6 +64,33 @@ public class Launcher{
     }
     
     private static void tour(Board board){
-//    	board.tir(); 
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Saisir une coordonnée X");
+        String X = sc.nextLine();
+        System.out.println("Saisir une coordonnée Y");        
+        int Y = Integer.valueOf(sc.nextLine());
+        
+        int tir = board.tir(X,Y); 
+         
+        while (tir == -1 ){
+        	System.out.println("Saisie non valable !!");
+        tir = board.tir(X,Y);
+        
+        }       
+    	
+    	if(tir == Board.CASE_TOUCHE){
+    		System.out.println("TOUCHE !!");
+    		
+    	}
+    	else if (tir == Board.CASE_COULE){
+    		System.out.println("COULE !!");
+    		tour(board);    		
+    	}
+    	
+    	else{
+    		System.out.println("RATE !!");    		
+    	}
+    	
     }
+
 }

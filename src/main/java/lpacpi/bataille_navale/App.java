@@ -1,5 +1,4 @@
 package lpacpi.bataille_navale;
-
 /**
  * Hello world!
  *
