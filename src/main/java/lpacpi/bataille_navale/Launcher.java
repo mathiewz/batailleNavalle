@@ -27,10 +27,10 @@ public class Launcher{
 		//		}
 		while(isNotGameOver){
 			System.out.println("\nTour du Joueur 1\n================\n\n");
-			tour(j1);
+			tour(j1, j2);
 			if(isNotGameOver){
 				System.out.println("\nTour du Joueur 2\n================\n\n");
-				tour(j2);
+				tour(j2, j1);
 			}
 		}
 		System.out.println("Game Over !!!");
@@ -107,14 +107,15 @@ public class Launcher{
 
 	}
 
-	private static void tour(Board board){
-		System.out.println(board.toString());
+	private static void tour(Board boardJoueur, Board boardEnnemy){
+		System.out.println(boardJoueur.afficheAllie());
+		System.out.println(boardEnnemy.afficheEnnemy());
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Saisir les coordonnées du tir  ");
 		String XY = "";
 		XY = sc.nextLine();
 
-		int tir = board.tir(XY); 
+		int tir = boardEnnemy.tir(XY); 
 		while (tir == -1 ){
 			System.out.println("Saisie non valable !!");
 			sc = new Scanner(System.in);
@@ -122,7 +123,7 @@ public class Launcher{
 			XY = "";
 			XY = sc.nextLine();
 
-			tir = board.tir(XY); 
+			tir = boardEnnemy.tir(XY); 
 
 		}       
 		if (tir == Board.BATEAU_COULE){
@@ -133,7 +134,7 @@ public class Launcher{
 			}
 			else if (tir == Board.BATEAU_COULE){
 				System.out.println("Le bateau ennemi à coulé  !!");
-				tour(board);    		
+				tour(boardJoueur, boardEnnemy);    		
 			}
 		}
 

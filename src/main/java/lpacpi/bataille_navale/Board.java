@@ -70,9 +70,9 @@ public class Board {
 		}
 	}
 
-	public String toString(){
+	public String afficheAllie(){
 		String ret = new String();
-		ret += "Etat du board\n";
+		ret += "Etat de votre board\n";
 		ret += "   A B C D E F G H I J\n";
 		for(int i=0; i<DIMENSION;i++){
 			ret += "   ------------------- \n"+(i+1);
@@ -83,6 +83,30 @@ public class Board {
 					ret += " ";
 				} else if(plateau[j][i] == CASE_BATEAU){
 					ret += "#";
+				} else if(plateau[j][i] == CASE_DANS_EAU){
+					ret += "O";
+				} else if(plateau[j][i] == CASE_TOUCHE){
+					ret += "X";
+				}
+				ret+= "|";
+			}
+			ret += "\n";
+		}
+		ret += "   ------------------- ";
+		return ret;
+	}
+	
+	public String afficheEnnemy(){
+		String ret = new String();
+		ret += "Etat du board ennemi\n";
+		ret += "   A B C D E F G H I J\n";
+		for(int i=0; i<DIMENSION;i++){
+			ret += "   ------------------- \n"+(i+1);
+			if(i<9){ret +=" |";}
+			else{ret +="|";}
+			for(int j=0; j<DIMENSION;j++){
+				if(plateau[j][i] == CASE_EAU || plateau[j][i] == CASE_BATEAU){
+					ret += " ";
 				} else if(plateau[j][i] == CASE_DANS_EAU){
 					ret += "O";
 				} else if(plateau[j][i] == CASE_TOUCHE){
