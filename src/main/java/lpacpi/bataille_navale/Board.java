@@ -12,7 +12,7 @@ public class Board {
 
 	public Board()	{
 		for(int i=0; i<DIMENSION;i++){
-			for(int j=0; i<DIMENSION;j++){
+			for(int j=0; j<DIMENSION;j++){
 				plateau[i][j] = CASE_EAU;
 			}
 		}
@@ -23,13 +23,13 @@ public class Board {
 			if(coordonneeX+bateau.GetTaille()<DIMENSION) {
 				boolean onPeutPlacer = true;
 				for(int n = 0; n < bateau.GetTaille(); n++){
-					if(plateau[coordonneeX+n][coordonneeY]==CASE_BATEAU){
+					if(plateau[coordonneeY][coordonneeX+n]==CASE_BATEAU){
 						onPeutPlacer = false;
 					}
 				}
 				if(onPeutPlacer){
 					for(int n = 0; n < bateau.GetTaille(); n++){
-						plateau[coordonneeX+n][coordonneeY]=CASE_BATEAU;
+						plateau[coordonneeY][coordonneeX+n]=CASE_BATEAU;
 					}
 				} else {
 					throw new Exception("Erreur : Case déja occupée");
@@ -44,13 +44,13 @@ public class Board {
 			if(coordonneeY+bateau.GetTaille()<DIMENSION) {
 				boolean onPeutPlacer = true;
 				for(int n = 0; n < bateau.GetTaille(); n++){
-					if(plateau[coordonneeX][coordonneeY+n]==CASE_BATEAU){
+					if(plateau[coordonneeY+n][coordonneeX]==CASE_BATEAU){
 						onPeutPlacer = false;
 					}
 				}
 				if(onPeutPlacer){
 					for(int n = 0; n < bateau.GetTaille(); n++){
-						plateau[coordonneeX][coordonneeY+n]=CASE_BATEAU;
+						plateau[coordonneeY+n][coordonneeX]=CASE_BATEAU;
 					}
 				} else {
 					throw new Exception("Erreur : Case déja occupée");
@@ -64,9 +64,10 @@ public class Board {
 	public String toString(){
 		String ret = new String();
 		ret += "Etat du board\n";
+		ret += "  A B C D E F G H I J\n";
 		for(int i=0; i<DIMENSION;i++){
-			ret += " ------------------- ";
-			for(int j=0; i<DIMENSION;j++){
+			ret += "  ------------------- \n"+(i+1)+"|";
+			for(int j=0; j<DIMENSION;j++){
 				ret+= plateau[i][j]+"|";
 			}
 			ret += "\n";
