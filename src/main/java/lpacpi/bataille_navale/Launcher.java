@@ -66,41 +66,17 @@ public class Launcher{
 
 	private static void placerBateau(Board board){
 		try {
+			String[] nomBateau=new String[]{"torpilleur","sous-marin","contre-torpilleur","croiseur","porte-avions"};
+			int[] dimBateau=new int[]{2,3,3,4,5};
 			Scanner sc = new Scanner(System.in);
-			System.out.println("Veuillez saisir coordonnée torpilleur :");
-			int[] coordonee = Board.parseStringCoordonnee(sc.nextLine());
-			sc = new Scanner(System.in);
-			System.out.println("Veuillez saisir sens torpilleur (horizontal=1 et vertical=2):");
-			int sens = Integer.valueOf(sc.nextLine());
-			board.placerBateau(new Bateau(2, "torpilleur", coordonee[0], coordonee[1], sens));
-			sc = new Scanner(System.in);
-			System.out.println("Veuillez saisir coordonnée sous-marin :");
-			coordonee = Board.parseStringCoordonnee(sc.nextLine());
-			sc = new Scanner(System.in);
-			System.out.println("Veuillez saisir sens sous-marin (horizontal=1 et vertical=2):");
-			sens = Integer.valueOf(sc.nextLine());
-			board.placerBateau(new Bateau(3, "sous-marin", coordonee[0], coordonee[1], sens));
-			sc = new Scanner(System.in);
-			System.out.println("Veuillez saisir coordonnée contre-torpilleur :");
-			coordonee = Board.parseStringCoordonnee(sc.nextLine());
-			sc = new Scanner(System.in);
-			System.out.println("Veuillez saisir sens contre-torpilleur (horizontal=1 et vertical=2):");
-			sens = Integer.valueOf(sc.nextLine());
-			board.placerBateau(new Bateau(3, "contre-torpilleur", coordonee[0], coordonee[1], sens));
-			sc = new Scanner(System.in);
-			System.out.println("Veuillez saisir coordonnée croiseur :");
-			coordonee = Board.parseStringCoordonnee(sc.nextLine());
-			sc = new Scanner(System.in);
-			System.out.println("Veuillez saisir sens croiseur (horizontal=1 et vertical=2):");
-			sens = Integer.valueOf(sc.nextLine());
-			board.placerBateau(new Bateau(4, "croiseur", coordonee[0], coordonee[1], sens));
-			sc = new Scanner(System.in);
-			System.out.println("Veuillez saisir coordonnée porte-avions :");
-			coordonee = Board.parseStringCoordonnee(sc.nextLine());
-			sc = new Scanner(System.in);
-			System.out.println("Veuillez saisir sens porte-avions (horizontal=1 et vertical=2):");
-			sens = Integer.valueOf(sc.nextLine());
-			board.placerBateau(new Bateau(5, "porte-avions", coordonee[0], coordonee[1], sens));
+			for(int i=0;i<5;i++){
+				System.out.println("Veuillez saisir coordonnée "+nomBateau[i]+" :");
+				int[] coordonee = Board.parseStringCoordonnee(sc.nextLine());
+				sc = new Scanner(System.in);
+				System.out.println("Veuillez saisir sens torpilleur (horizontal=1 et vertical=2):");
+				int sens = Integer.valueOf(sc.nextLine());
+				board.placerBateau(new Bateau(dimBateau[i], nomBateau[i], coordonee[0], coordonee[1], sens));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
