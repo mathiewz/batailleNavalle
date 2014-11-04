@@ -19,12 +19,12 @@ public class Launcher{
         Board j2 = new Board();
     	placerBateau(j1);
     	placerBateau(j2);
-//    	try {
-//			j2.placerBateau(new Bateau(2, "bla", 4, 7, Board.SENS_VERTICAL));
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+    	try {
+			j2.placerBateau(new Bateau(2, "bla", 4, 7, Board.SENS_VERTICAL));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         while(isNotGameOver){
         	System.out.println("Joueur 1");
         	tour(j1);
@@ -66,7 +66,7 @@ public class Launcher{
     
     private static void placerBateau(Board board){
     	try {
-			board.placerBateau(new Bateau(2, "torpilleur", 0, 0, Board.SENS_VERTICAL));
+			board.placerBateau(new Bateau(2, "torpilleur", 0, 0, Board.SENS_HORIZONTAL));
 	    	board.placerBateau(new Bateau(3, "sous-marin", 0, 1, Board.SENS_HORIZONTAL));
 	    	board.placerBateau(new Bateau(3, "contre-torpilleur", 0, 2, Board.SENS_HORIZONTAL));
 	    	board.placerBateau(new Bateau(4, "croiseur", 0, 3, Board.SENS_HORIZONTAL));
@@ -95,7 +95,6 @@ public class Launcher{
         	tir = board.tir(XY); 
         
         }       
-    	
     	if(tir == Board.CASE_TOUCHE){
     		System.out.println("Un bateau ennemi à été touché  !!");
     		

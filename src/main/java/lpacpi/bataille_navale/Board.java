@@ -6,13 +6,13 @@ public class Board {
 	public static int DIMENSION=10;
 	private int[][] plateau = new int[DIMENSION][DIMENSION];
 	public static int SENS_HORIZONTAL=1;
-	public static int SENS_VERTICAL=-1;
+	public static int SENS_VERTICAL=2;
 	public static int CASE_EAU=1;
 	public static int CASE_BATEAU=2;
 	public static int CASE_DANS_EAU=3;
 	public static int CASE_TOUCHE=4;
 
-	public static int BATEAU_COULE = 0;
+	public static int BATEAU_COULE = 9;
 
 	private ArrayList<Bateau> listBateaux;
 
@@ -59,6 +59,7 @@ public class Board {
 				if(onPeutPlacer){
 					for(int n = 0; n < bateau.GetTaille(); n++){
 						plateau[bateau.getX()][bateau.getY()+n]=CASE_BATEAU;
+						listBateaux.add(bateau);
 					}
 				} else {
 					throw new Exception("Erreur : Case déja occupée");
@@ -103,16 +104,16 @@ public class Board {
 		}
 		switch(plateau[coordonnee[0]][coordonnee[1]]){
 		case 1:
+			System.out.println("dans l'eau");
 			plateau[coordonnee[0]][coordonnee[1]]=CASE_DANS_EAU;
-			ret = plateau[coordonnee[0]][coordonnee[1]];
+			ret = CASE_DANS_EAU;
 			break;
 		case 2:
 			plateau[coordonnee[0]][coordonnee[1]]=CASE_TOUCHE;
 			for(Bateau bateau : listBateaux){
 				if(bateau.isThisBateauAtThisPlace(coordonnées)){
-					System.out.println(bateau.retirerVie());
 					if(!bateau.estCoulé()){
-						ret = plateau[coordonnee[0]][coordonnee[1]];
+						ret = CASE_TOUCHE;
 					} else {
 						ret = BATEAU_COULE;
 					}
