@@ -67,12 +67,10 @@ public class Launcher{
     
     private static void tour(Board board){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Saisir une coordonnée X");
-        String X = sc.nextLine();
-        System.out.println("Saisir une coordonnée Y");        
-        int Y = Integer.valueOf(sc.nextLine());
+        System.out.println("Saisir les coordonnées du tir  ");
+        String XY = sc.nextLine();
         
-        int tir = board.tir(X,Y); 
+        int tir = board.tir(XY); 
          
         while (tir == -1 ){
         	System.out.println("Saisie non valable !!");
@@ -81,11 +79,11 @@ public class Launcher{
         }       
     	
     	if(tir == Board.CASE_TOUCHE){
-    		System.out.println("TOUCHE !!");
+    		System.out.println("Un bateau ennemi à été touché  !!");
     		
     	}
     	else if (tir == Board.CASE_COULE){
-    		System.out.println("COULE !!");
+    		System.out.println("Le bateau ennemi à coulé  !!");
     		tour(board);    		
     	}
     	
