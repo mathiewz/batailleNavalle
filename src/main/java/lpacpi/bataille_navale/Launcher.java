@@ -19,12 +19,12 @@ public class Launcher{
         Board j2 = new Board();
     	placerBateau(j1);
     	placerBateau(j2);
-    	try {
-			j2.placerBateau(new Bateau(2, "bla", 4, 7, Board.SENS_VERTICAL));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//    	try {
+//			j2.placerBateau(new Bateau(2, "bla", 4, 7, Board.SENS_VERTICAL));
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
         while(isNotGameOver){
         	System.out.println("\nTour du Joueur 1\n================\n\n");
         	tour(j1);
@@ -66,11 +66,41 @@ public class Launcher{
     
     private static void placerBateau(Board board){
     	try {
-			board.placerBateau(new Bateau(2, "torpilleur", 0, 0, Board.SENS_HORIZONTAL));
-	    	board.placerBateau(new Bateau(3, "sous-marin", 0, 1, Board.SENS_HORIZONTAL));
-	    	board.placerBateau(new Bateau(3, "contre-torpilleur", 0, 2, Board.SENS_HORIZONTAL));
-	    	board.placerBateau(new Bateau(4, "croiseur", 0, 3, Board.SENS_HORIZONTAL));
-	    	board.placerBateau(new Bateau(5, "porte-avions", 0, 4, Board.SENS_HORIZONTAL));
+    		Scanner sc = new Scanner(System.in);
+            System.out.println("Veuillez saisir coordonnée torpilleur :");
+            int[] coordonee = Board.parseStringCoordonnee(sc.nextLine());
+            sc = new Scanner(System.in);
+            System.out.println("Veuillez saisir sens torpilleur (horizontal=1 et vertical=2):");
+            int sens = Integer.valueOf(sc.nextLine());
+			board.placerBateau(new Bateau(2, "torpilleur", coordonee[0], coordonee[1], sens));
+			 sc = new Scanner(System.in);
+            System.out.println("Veuillez saisir coordonnée sous-marin :");
+            coordonee = Board.parseStringCoordonnee(sc.nextLine());
+            sc = new Scanner(System.in);
+            System.out.println("Veuillez saisir sens sous-marin (horizontal=1 et vertical=2):");
+            sens = Integer.valueOf(sc.nextLine());
+	    	board.placerBateau(new Bateau(3, "sous-marin", coordonee[0], coordonee[1], sens));
+	    	 sc = new Scanner(System.in);
+            System.out.println("Veuillez saisir coordonnée contre-torpilleur :");
+             coordonee = Board.parseStringCoordonnee(sc.nextLine());
+             sc = new Scanner(System.in);
+             System.out.println("Veuillez saisir sens contre-torpilleur (horizontal=1 et vertical=2):");
+             sens = Integer.valueOf(sc.nextLine());
+	    	board.placerBateau(new Bateau(3, "contre-torpilleur", coordonee[0], coordonee[1], sens));
+	    	 sc = new Scanner(System.in);
+	            System.out.println("Veuillez saisir coordonnée croiseur :");
+	             coordonee = Board.parseStringCoordonnee(sc.nextLine());
+	             sc = new Scanner(System.in);
+	             System.out.println("Veuillez saisir sens croiseur (horizontal=1 et vertical=2):");
+	             sens = Integer.valueOf(sc.nextLine());
+	    	board.placerBateau(new Bateau(4, "croiseur", coordonee[0], coordonee[1], sens));
+	             sc = new Scanner(System.in);
+	             System.out.println("Veuillez saisir coordonnée porte-avions :");
+	              coordonee = Board.parseStringCoordonnee(sc.nextLine());
+	              sc = new Scanner(System.in);
+	              System.out.println("Veuillez saisir sens porte-avions (horizontal=1 et vertical=2):");
+	              sens = Integer.valueOf(sc.nextLine());
+	    	board.placerBateau(new Bateau(5, "porte-avions", coordonee[0], coordonee[1], sens));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -95,7 +125,17 @@ public class Launcher{
         	tir = board.tir(XY); 
         
         }       
+<<<<<<< HEAD
     	if (tir == Board.BATEAU_COULE){
+=======
+    	
+    	if(tir == Board.CASE_TOUCHE){
+    		System.out.println("Un bateau ennemi à été touché  !!");
+    		
+    	}
+    	else if (tir == Board.BATEAU_COULE){
+    		System.out.println("Le bateau ennemi à coulé  !!");
+>>>>>>> e27d398137cbc8735cb8eb025176520162511a46
     		tour(board);    		
     	}
     }
