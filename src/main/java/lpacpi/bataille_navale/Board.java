@@ -64,14 +64,31 @@ public class Board {
 	public String toString(){
 		String ret = new String();
 		ret += "Etat du board\n";
+<<<<<<< HEAD
+		ret += "   A B C D E F G H I J\n";
+		for(int i=0; i<DIMENSION;i++){
+			ret += "   ------------------- \n"+(i+1);
+			if(i<9){ret +=" |";}
+			else{ret +="|";}
+=======
 		for(int i=0; i<DIMENSION;i++){
 			ret += " ------------------- ";
+>>>>>>> a10e7baf731ffb160051c380be77c332a375bddd
 			for(int j=0; j<DIMENSION;j++){
-				ret+= plateau[i][j]+"|";
+				if(plateau[i][j] == CASE_EAU){
+					ret += " ";
+				} else if(plateau[i][j] == CASE_BATEAU){
+					ret += "#";
+				} else if(plateau[i][j] == CASE_DANS_EAU){
+					ret += "O";
+				} else if(plateau[i][j] == CASE_TOUCHE){
+					ret += "X";
+				}
+				ret+= "|";
 			}
 			ret += "\n";
 		}
-		ret += " ------------------- ";
+		ret += "   ------------------- ";
 		return ret;
 	}
 
