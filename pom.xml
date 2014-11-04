@@ -22,7 +22,6 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<packageName>lpacpi.bataille_navale</packageName>
 							<mainClass>lpacpi.bataille_navale.App</mainClass>
 						</manifest>
 					</archive>
@@ -34,8 +33,9 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 </project>

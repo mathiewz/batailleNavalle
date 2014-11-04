@@ -11,7 +11,10 @@ public class Launcher{
     public static void main( String[] args ){
     	boolean isNotGameOver = true;
         System.out.println( "Bienvenue dans la bataille navale!" );
-        menu();
+        int menu = -1;
+        while (menu==-1){
+        	menu = menu();
+        }
         Board j1 = new Board();
         Board j2 = new Board();
     	placerBateau(j1);
@@ -26,30 +29,33 @@ public class Launcher{
         }
         System.out.println("Game Over !!!");
     }
-    private static void menu(){
+    private static int menu(){
         System.out.println("1-jeux");
         System.out.println("2-credit");
         System.out.println("3-Quitter");
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez saisir un numéro(1,2,3) :");
         int str = Integer.valueOf(sc.nextLine());
-       
+        int ret = 0;
     	switch(str){
 	    	case 1:
-
+	    		ret = 0;
 	    		break;
 	    	
 	    	case 2:
-	    		
+	    		System.out.println("blabla les credits.....");
+	    		ret = -1;
 	    		break;
 	    	
 	    	case 3:
 	    		System.exit(0);
 	    		break;
 	    	default:
-	            System.out.println("ERREUR");
+	            System.out.println("Saisie non valide");
+	            ret = -1;
 	            break;
     	}
+    	return ret;
     }
     
     private static void placerBateau(Board board){
