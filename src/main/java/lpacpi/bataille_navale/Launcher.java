@@ -19,11 +19,17 @@ public class Launcher{
         Board j2 = new Board();
     	placerBateau(j1);
     	placerBateau(j2);
-    	System.out.println(j1.toString());
-    	System.out.println(j2.toString());
+//    	try {
+//			j2.placerBateau(new Bateau(2, "bla", 4, 7, Board.SENS_VERTICAL));
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
         while(isNotGameOver){
+        	System.out.println("Joueur 1");
         	tour(j1);
         	if(isNotGameOver){
+        		System.out.println("Joueur 2");
         		tour(j2);
         	}
         }
@@ -35,7 +41,7 @@ public class Launcher{
         System.out.println("3-Quitter");
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez saisir un numéro(1,2,3) :");
-        int str = Integer.valueOf(sc.nextLine());
+    	int str = Integer.valueOf(sc.nextLine());
         int ret = 0;
     	switch(str){
 	    	case 1:
@@ -60,11 +66,11 @@ public class Launcher{
     
     private static void placerBateau(Board board){
     	try {
-			board.placerBateau(0,0, new Bateau(2, "torpilleur"),Board.SENS_HORIZONTAL);
-	    	board.placerBateau(0,1, new Bateau(3, "sous-marin"),Board.SENS_HORIZONTAL);
-	    	board.placerBateau(0,2, new Bateau(3, "contre-torpilleur"),Board.SENS_HORIZONTAL);
-	    	board.placerBateau(0,3, new Bateau(4, "croiseur"),Board.SENS_HORIZONTAL);
-	    	board.placerBateau(0,4, new Bateau(5, "porte-avions"),Board.SENS_HORIZONTAL);
+			board.placerBateau(new Bateau(2, "torpilleur", 0, 0, Board.SENS_VERTICAL));
+	    	board.placerBateau(new Bateau(3, "sous-marin", 0, 1, Board.SENS_HORIZONTAL));
+	    	board.placerBateau(new Bateau(3, "contre-torpilleur", 0, 2, Board.SENS_HORIZONTAL));
+	    	board.placerBateau(new Bateau(4, "croiseur", 0, 3, Board.SENS_HORIZONTAL));
+	    	board.placerBateau(new Bateau(5, "porte-avions", 0, 4, Board.SENS_HORIZONTAL));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -72,15 +78,21 @@ public class Launcher{
     }
     
     private static void tour(Board board){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Saisir les coordonnées du tir  ");
-        String XY = sc.nextLine();
-        
-        int tir = board.tir(XY); 
-         
+    	System.out.println(board.toString());
+    	Scanner sc = new Scanner(System.in);
+    	System.out.println("Saisir les coordonnées du tir  ");
+    	String XY = "";
+    	XY = sc.nextLine();
+    	
+    	int tir = board.tir(XY); 
         while (tir == -1 ){
         	System.out.println("Saisie non valable !!");
-        tir = board.tir(XY);
+        	sc = new Scanner(System.in);
+        	System.out.println("Saisir les coordonnées du tir  ");
+        	XY = "";
+        	XY = sc.nextLine();
+        	
+        	tir = board.tir(XY); 
         
         }       
     	
@@ -88,7 +100,7 @@ public class Launcher{
     		System.out.println("Un bateau ennemi à été touché  !!");
     		
     	}
-    	else if (tir == Board.CASE_COULE){
+    	else if (tir == Board.BATEAU_COULE){
     		System.out.println("Le bateau ennemi à coulé  !!");
     		tour(board);    		
     	}
@@ -96,7 +108,6 @@ public class Launcher{
     	else{
     		System.out.println("RATE !!");    		
     	}
-    	
     }
 
 }

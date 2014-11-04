@@ -1,5 +1,7 @@
 package lpacpi.bataille_navale;
 
+import java.util.ArrayList;
+
 public class Board {
 	public static int DIMENSION=10;
 	private int[][] plateau = new int[DIMENSION][DIMENSION];
@@ -10,27 +12,33 @@ public class Board {
 	public static int CASE_DANS_EAU=3;
 	public static int CASE_TOUCHE=4;
 
+	public static int BATEAU_COULE = 0;
+
+	private ArrayList<Bateau> listBateaux;
+
 	public Board()	{
 		for(int i=0; i<DIMENSION;i++){
 			for(int j=0; j<DIMENSION;j++){
 				plateau[i][j] = CASE_EAU;
 			}
 		}
+		listBateaux = new ArrayList<Bateau>();
 	}
-	public void placerBateau(int coordonneeX,int coordonneeY,Bateau bateau,int sens) throws Exception
+	public void placerBateau(Bateau bateau) throws Exception
 	{
-		if(sens==SENS_HORIZONTAL){
-			if(coordonneeX+bateau.GetTaille()<DIMENSION) {
+		if(bateau.getSens()==SENS_HORIZONTAL){
+			if(bateau.getX()+bateau.GetTaille()<DIMENSION) {
 				boolean onPeutPlacer = true;
 				for(int n = 0; n < bateau.GetTaille(); n++){
-					if(plateau[coordonneeX+n][coordonneeY]==CASE_BATEAU){
+					if(plateau[bateau.getX()+n][bateau.getY()]==CASE_BATEAU){
 						onPeutPlacer = false;
 					}
 				}
 				if(onPeutPlacer){
 					for(int n = 0; n < bateau.GetTaille(); n++){
-						plateau[coordonneeX+n][coordonneeY]=CASE_BATEAU;
+						plateau[bateau.getX()+n][bateau.getY()]=CASE_BATEAU;
 					}
+					listBateaux.add(bateau);
 				} else {
 					throw new Exception("Erreur : Case déja occupée");
 				}
@@ -40,17 +48,17 @@ public class Board {
 
 		}
 
-		if(sens==SENS_VERTICAL){
-			if(coordonneeY+bateau.GetTaille()<DIMENSION) {
+		if(bateau.getSens()==SENS_VERTICAL){
+			if(bateau.getX()+bateau.GetTaille()<DIMENSION) {
 				boolean onPeutPlacer = true;
 				for(int n = 0; n < bateau.GetTaille(); n++){
-					if(plateau[coordonneeX][coordonneeY+n]==CASE_BATEAU){
+					if(plateau[bateau.getX()][bateau.getY()+n]==CASE_BATEAU){
 						onPeutPlacer = false;
 					}
 				}
 				if(onPeutPlacer){
 					for(int n = 0; n < bateau.GetTaille(); n++){
-						plateau[coordonneeX][coordonneeY+n]=CASE_BATEAU;
+						plateau[bateau.getX()][bateau.getY()+n]=CASE_BATEAU;
 					}
 				} else {
 					throw new Exception("Erreur : Case déja occupée");
@@ -60,7 +68,7 @@ public class Board {
 			}
 		}
 	}
-	
+
 	public String toString(){
 		String ret = new String();
 		ret += "Etat du board\n";
@@ -70,13 +78,13 @@ public class Board {
 			if(i<9){ret +=" |";}
 			else{ret +="|";}
 			for(int j=0; j<DIMENSION;j++){
-				if(plateau[i][j] == CASE_EAU){
+				if(plateau[j][i] == CASE_EAU){
 					ret += " ";
-				} else if(plateau[i][j] == CASE_BATEAU){
+				} else if(plateau[j][i] == CASE_BATEAU){
 					ret += "#";
-				} else if(plateau[i][j] == CASE_DANS_EAU){
+				} else if(plateau[j][i] == CASE_DANS_EAU){
 					ret += "O";
-				} else if(plateau[i][j] == CASE_TOUCHE){
+				} else if(plateau[j][i] == CASE_TOUCHE){
 					ret += "X";
 				}
 				ret+= "|";
@@ -89,35 +97,56 @@ public class Board {
 
 	public int tir(String coordonnées){
 		int[]coordonnee=parseStringCoordonnee(coordonnées);
-	
-		
-				switch(plateau[coordonnee[0]][coordonnee[1]]){
-		    	case 1:
-		    		plateau[coordonnee[0]][coordonnee[1]]=CASE_DANS_EAU;
-		    		return plateau[coordonnee[0]][coordonnee[1]];
-		    	
-		    	case 2:
-		    		plateau[coordonnee[0]][coordonnee[1]]=CASE_TOUCHE;
-		    		return plateau[coordonnee[0]][coordonnee[1]];
-		    	case 3:
-		    		System.out.println("case déjà visée");
-		    		return -1;
-		    		
-		    	
-		    	case 4:
-		    		System.out.println("case déjà visée");
-		    		return -1;
-		    	
-		    	default:
-		            System.out.println("ERREUR");
-		            return -1;
-		       
-			
-	    
+		int ret = 0;
+		if(coordonnee[0] == -1 || coordonnee[0]>=DIMENSION || coordonnee[1] >= DIMENSION){
+			ret = -1;
+		}
+		switch(plateau[coordonnee[0]][coordonnee[1]]){
+		case 1:
+			plateau[coordonnee[0]][coordonnee[1]]=CASE_DANS_EAU;
+			ret = plateau[coordonnee[0]][coordonnee[1]];
+			break;
+		case 2:
+			plateau[coordonnee[0]][coordonnee[1]]=CASE_TOUCHE;
+			for(Bateau bateau : listBateaux){
+				if(bateau.isThisBateauAtThisPlace(coordonnées)){
+					System.out.println(bateau.retirerVie());
+					if(!bateau.estCoulé()){
+						ret = plateau[coordonnee[0]][coordonnee[1]];
+					} else {
+						ret = BATEAU_COULE;
+					}
 				}
+			}
+			break;
+		case 3:
+			System.out.println("case déjà visée");
+			ret = -1;
+			break;
+
+		case 4:
+			System.out.println("case déjà visée");
+			ret = -1;
+			break;
+		default:
+			System.out.println("Valeur du tableau improbable ô_O");
+			ret = -1;
+			break;
+		}
+		return ret;
 	}
-	private int[] parseStringCoordonnee(String coordonnées) {
-		
-		return null;
+	public static int[] parseStringCoordonnee(String coordonnées){
+		int[] ret = new int[2];
+		if(convertCharToIndex(coordonnées) < 0 || convertCharToIndex(coordonnées) > 9 || convertCharToIndex(coordonnées)< 0|| convertCharToIndex(coordonnées) > 9){
+			ret[0] = -1;
+		} else {
+			ret[0] = convertCharToIndex(coordonnées);
+			ret[1] = Integer.valueOf(coordonnées.substring(1))-1;
+		}
+		return ret;
+	}
+	
+	private static int convertCharToIndex(String coordonnées) {
+		return (int)coordonnées.toUpperCase().charAt(0)-65;
 	}
 }

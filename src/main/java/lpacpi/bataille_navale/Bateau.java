@@ -4,12 +4,19 @@ public class Bateau {
 		
 	private int taille;
 	private String nom;
+	private int posX;
+	private int posY;
+	private int sens;
+	private int nbCasesPasTouchees;
 	
-	public Bateau(int uneTaille, String unNom)
+	public Bateau(int uneTaille, String unNom, int posX, int posY, int sens)
 	{
 		taille = uneTaille;
+		nbCasesPasTouchees = uneTaille;
 		nom = unNom;
-		
+		this.posX = posX;
+		this.posY = posY;
+		this.sens = sens;
 	}
 	 public int GetTaille(){
 		 return taille;
@@ -19,24 +26,49 @@ public class Bateau {
 		 return nom;
 	 }
 	 
-	 public void SetTaille(int uneTaille)
-	  {
-		 taille = uneTaille;
-	  }
+	 public int getX(){
+		 return this.posX;
+	 }
 	 
-	 public void SetNom(String unNom)
-	  {
-		 nom = unNom;
-
-	  }
-
+	 public int getY(){
+		 return this.posY;
+	 }
+	 
+	 public int getSens(){
+		 return this.sens;
+	 }
+	 
 	 public String toString(String nom, int taille)
 	 {
 		 String toString = "nom du bateau :"+ nom +"taille du bateau"+taille;	
 		 return toString;	
 	 }
 	 
-
+	 public boolean isThisBateauAtThisPlace(String coordoneesTxt){
+		 boolean ret = false;
+		 int[] coordonees = Board.parseStringCoordonnee(coordoneesTxt);
+		 for(int i=0;i<taille;i++){
+			 if(sens == Board.SENS_HORIZONTAL){
+				 if(coordonees[0] == posX+i && coordonees[1] == posY){
+					 ret = true;
+				 }
+			 } else if(sens == Board.SENS_VERTICAL) {
+				 if(coordonees[0] == posX && coordonees[1] == posY+i){
+					 ret = true;
+				 }
+			 }
+		 }
+		 return ret;
+	 }
+	 
+	 public int retirerVie(){
+		 nbCasesPasTouchees--;
+		 return nbCasesPasTouchees;
+	 }
+	 
+	 public boolean estCoulé(){
+		 return (nbCasesPasTouchees == 0);
+	 }
 	
 	
 } 
