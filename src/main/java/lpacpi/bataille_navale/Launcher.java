@@ -80,7 +80,7 @@ public class Launcher{
          
         while (tir == -1 ){
         	System.out.println("Saisie non valable !!");
-        tir = board.tir(X,Y);
+        tir = board.tir(XY);
         
         }       
     	
