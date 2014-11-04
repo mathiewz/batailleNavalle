@@ -183,7 +183,7 @@ public class Board {
 	
 	public static boolean isNumeric(String str) {  
 	  try {  
-	    double d = Double.parseDouble(str);  
+	    int i = Integer.parseInt(str);  
 	  }
 	  catch(NumberFormatException nfe)  
 	  {  
