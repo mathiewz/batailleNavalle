@@ -73,7 +73,7 @@ public class Launcher{
 			System.out.println("Veuillez saisir sens torpilleur (horizontal=1 et vertical=2):");
 			int sens = Integer.valueOf(sc.nextLine());
 			board.placerBateau(new Bateau(2, "torpilleur", coordonee[0], coordonee[1], sens));
-			sc = new Scanner(System.in);
+		/*	sc = new Scanner(System.in);
 			System.out.println("Veuillez saisir coordonnée sous-marin :");
 			coordonee = Board.parseStringCoordonnee(sc.nextLine());
 			sc = new Scanner(System.in);
@@ -100,7 +100,7 @@ public class Launcher{
 			sc = new Scanner(System.in);
 			System.out.println("Veuillez saisir sens porte-avions (horizontal=1 et vertical=2):");
 			sens = Integer.valueOf(sc.nextLine());
-			board.placerBateau(new Bateau(5, "porte-avions", coordonee[0], coordonee[1], sens));
+			board.placerBateau(new Bateau(5, "porte-avions", coordonee[0], coordonee[1], sens));*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
