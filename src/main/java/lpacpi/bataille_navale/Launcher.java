@@ -16,6 +16,8 @@ public class Launcher{
         Board j2 = new Board();
     	placerBateau(j1);
     	placerBateau(j2);
+    	System.out.println(j1.toString());
+    	System.out.println(j2.toString());
         while(isNotGameOver){
         	tour(j1);
         	if(isNotGameOver){
@@ -34,7 +36,7 @@ public class Launcher{
        
     	switch(str){
 	    	case 1:
-	    		
+
 	    		break;
 	    	
 	    	case 2:
