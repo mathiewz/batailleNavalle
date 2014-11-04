@@ -26,10 +26,10 @@ public class Launcher{
 			e.printStackTrace();
 		}
         while(isNotGameOver){
-        	System.out.println("Joueur 1");
+        	System.out.println("\nTour du Joueur 1\n================\n\n");
         	tour(j1);
         	if(isNotGameOver){
-        		System.out.println("Joueur 2");
+        		System.out.println("\nTour du Joueur 2\n================\n\n");
         		tour(j2);
         	}
         }
@@ -95,17 +95,8 @@ public class Launcher{
         	tir = board.tir(XY); 
         
         }       
-    	if(tir == Board.CASE_TOUCHE){
-    		System.out.println("Un bateau ennemi à été touché  !!");
-    		
-    	}
-    	else if (tir == Board.BATEAU_COULE){
-    		System.out.println("Le bateau ennemi à coulé  !!");
+    	if (tir == Board.BATEAU_COULE){
     		tour(board);    		
-    	}
-    	
-    	else{
-    		System.out.println("RATE !!");    		
     	}
     }
 

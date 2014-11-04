@@ -59,8 +59,8 @@ public class Board {
 				if(onPeutPlacer){
 					for(int n = 0; n < bateau.GetTaille(); n++){
 						plateau[bateau.getX()][bateau.getY()+n]=CASE_BATEAU;
-						listBateaux.add(bateau);
 					}
+					listBateaux.add(bateau);
 				} else {
 					throw new Exception("Erreur : Case déja occupée");
 				}
@@ -96,43 +96,47 @@ public class Board {
 		return ret;
 	}
 
-	public int tir(String coordonnées){
-		int[]coordonnee=parseStringCoordonnee(coordonnées);
+	public int tir(String coordonnees){
+		int[]coordonnee=parseStringCoordonnee(coordonnees);
 		int ret = 0;
 		if(coordonnee[0] == -1 || coordonnee[0]>=DIMENSION || coordonnee[1] >= DIMENSION){
 			ret = -1;
-		}
-		switch(plateau[coordonnee[0]][coordonnee[1]]){
-		case 1:
-			System.out.println("dans l'eau");
-			plateau[coordonnee[0]][coordonnee[1]]=CASE_DANS_EAU;
-			ret = CASE_DANS_EAU;
-			break;
-		case 2:
-			plateau[coordonnee[0]][coordonnee[1]]=CASE_TOUCHE;
-			for(Bateau bateau : listBateaux){
-				if(bateau.isThisBateauAtThisPlace(coordonnées)){
-					if(!bateau.estCoulé()){
-						ret = CASE_TOUCHE;
-					} else {
-						ret = BATEAU_COULE;
+		} else {
+			switch(plateau[coordonnee[0]][coordonnee[1]]){
+			case 1:
+				System.out.println("dans l'eau");
+				plateau[coordonnee[0]][coordonnee[1]]=CASE_DANS_EAU;
+				ret = CASE_DANS_EAU;
+				break;
+			case 2:
+				plateau[coordonnee[0]][coordonnee[1]]=CASE_TOUCHE;
+				for(Bateau bateau : listBateaux){
+					if(bateau.isThisBateauAtThisPlace(coordonnees)){
+						bateau.retirerVie();
+						if(!bateau.estCoulé()){
+							System.out.println("Touché !");
+							ret = CASE_TOUCHE;
+						} else {
+							System.out.println(bateau.GetNom()+" coulé !");
+							ret = BATEAU_COULE;
+						}
 					}
 				}
-			}
-			break;
-		case 3:
-			System.out.println("case déjà visée");
-			ret = -1;
-			break;
+				break;
+			case 3:
+				System.out.println("case déjà visée");
+				ret = -1;
+				break;
 
-		case 4:
-			System.out.println("case déjà visée");
-			ret = -1;
-			break;
-		default:
-			System.out.println("Valeur du tableau improbable ô_O");
-			ret = -1;
-			break;
+			case 4:
+				System.out.println("case déjà visée");
+				ret = -1;
+				break;
+			default:
+				System.out.println("Valeur du tableau improbable ô_O");
+				ret = -1;
+				break;
+			}
 		}
 		return ret;
 	}
@@ -146,7 +150,7 @@ public class Board {
 		}
 		return ret;
 	}
-	
+
 	private static int convertCharToIndex(String coordonnées) {
 		return (int)coordonnées.toUpperCase().charAt(0)-65;
 	}
