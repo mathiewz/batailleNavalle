@@ -19,12 +19,6 @@ public class Launcher{
 		Board j2 = new Board();
 		placerBateau(j1);
 		placerBateau(j2);
-		//    	try {
-		//			j2.placerBateau(new Bateau(2, "bla", 4, 7, Board.SENS_VERTICAL));
-		//		} catch (Exception e) {
-		//			// TODO Auto-generated catch block
-		//			e.printStackTrace();
-		//		}
 		while(isNotGameOver){
 			System.out.println("\nTour du Joueur 1\n================\n\n");
 			tour(j1, j2);
