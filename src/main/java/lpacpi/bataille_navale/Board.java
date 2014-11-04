@@ -12,7 +12,7 @@ public class Board {
 
 	public Board()	{
 		for(int i=0; i<DIMENSION;i++){
-			for(int j=0; i<DIMENSION;j++){
+			for(int j=0; j<DIMENSION;j++){
 				plateau[i][j] = CASE_EAU;
 			}
 		}
@@ -66,7 +66,7 @@ public class Board {
 		ret += "Etat du board\n";
 		for(int i=0; i<DIMENSION;i++){
 			ret += " ------------------- ";
-			for(int j=0; i<DIMENSION;j++){
+			for(int j=0; j<DIMENSION;j++){
 				ret+= plateau[i][j]+"|";
 			}
 			ret += "\n";
@@ -74,5 +74,41 @@ public class Board {
 		ret += " ------------------- ";
 		return ret;
 	}
+<<<<<<< HEAD
 	
+=======
+	public int tir(String coordonnées){
+		int[]coordonnee=parseStringCoordonnee(coordonnées);
+	
+		
+				switch(plateau[coordonnee[0]][coordonnee[1]]){
+		    	case 1:
+		    		plateau[coordonnee[0]][coordonnee[1]]=CASE_DANS_EAU;
+		    		return plateau[coordonnee[0]][coordonnee[1]];
+		    	
+		    	case 2:
+		    		plateau[coordonnee[0]][coordonnee[1]]=CASE_TOUCHE;
+		    		return plateau[coordonnee[0]][coordonnee[1]];
+		    	case 3:
+		    		System.out.println("case déjà visée");
+		    		return -1;
+		    		
+		    	
+		    	case 4:
+		    		System.out.println("case déjà visée");
+		    		return -1;
+		    	
+		    	default:
+		            System.out.println("ERREUR");
+		            return -1;
+		       
+			
+	    
+				}
+	}
+	private int[] parseStringCoordonnee(String coordonnées) {
+		
+		return null;
+	}
+>>>>>>> 1c9acc860306643eb0cd47acc37f98e66f612388
 }
