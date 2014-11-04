@@ -35,6 +35,7 @@ public class Launcher{
 		}
 		System.out.println("Game Over !!!");
 	}
+	
 	private static int menu(){
 		System.out.println("1-jeux");
 		System.out.println("2-credit");
