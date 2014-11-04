@@ -66,11 +66,26 @@ public class Launcher{
     
     private static void placerBateau(Board board){
     	try {
-			board.placerBateau(new Bateau(2, "torpilleur", 0, 0, Board.SENS_VERTICAL));
-	    	board.placerBateau(new Bateau(3, "sous-marin", 0, 1, Board.SENS_HORIZONTAL));
-	    	board.placerBateau(new Bateau(3, "contre-torpilleur", 0, 2, Board.SENS_HORIZONTAL));
-	    	board.placerBateau(new Bateau(4, "croiseur", 0, 3, Board.SENS_HORIZONTAL));
-	    	board.placerBateau(new Bateau(5, "porte-avions", 0, 4, Board.SENS_HORIZONTAL));
+    		Scanner sc = new Scanner(System.in);
+            System.out.println("Veuillez saisir coordonnée torpilleur :");
+            int[] coordonee = Board.parseStringCoordonnee(sc.nextLine());
+			board.placerBateau(new Bateau(2, "torpilleur", coordonee[0], coordonee[1], Board.SENS_VERTICAL));
+			 sc = new Scanner(System.in);
+            System.out.println("Veuillez saisir coordonnée sous-marin :");
+            coordonee = Board.parseStringCoordonnee(sc.nextLine());
+	    	board.placerBateau(new Bateau(3, "sous-marin", coordonee[0], coordonee[1], Board.SENS_HORIZONTAL));
+	    	 sc = new Scanner(System.in);
+            System.out.println("Veuillez saisir coordonnée contre-torpilleur :");
+             coordonee = Board.parseStringCoordonnee(sc.nextLine());
+	    	board.placerBateau(new Bateau(3, "contre-torpilleur", coordonee[0], coordonee[1], Board.SENS_HORIZONTAL));
+	    	 sc = new Scanner(System.in);
+	            System.out.println("Veuillez saisir coordonnée croiseur :");
+	             coordonee = Board.parseStringCoordonnee(sc.nextLine());
+	    	board.placerBateau(new Bateau(4, "croiseur", coordonee[0], coordonee[1], Board.SENS_HORIZONTAL));
+	             sc = new Scanner(System.in);
+	             System.out.println("Veuillez saisir coordonnée porte-avions :");
+	              coordonee = Board.parseStringCoordonnee(sc.nextLine());
+	    	board.placerBateau(new Bateau(5, "porte-avions", coordonee[0], coordonee[1], Board.SENS_HORIZONTAL));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
