@@ -19,14 +19,15 @@ public class Bateau {
 		 return nom;
 	 }
 	 
-	 public void setTaille(int uneTaille)
+	 public void SetTaille(int uneTaille)
 	  {
 		 taille = uneTaille;
 	  }
 	 
-	 public void setNom(String unNom)
+	 public void SetNom(String unNom)
 	  {
 		 nom = unNom;
+
 	  }
 
 	 public String toString(String nom, int taille)

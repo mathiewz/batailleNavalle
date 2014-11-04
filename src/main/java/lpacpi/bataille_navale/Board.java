@@ -23,13 +23,13 @@ public class Board {
 			if(coordonneeX+bateau.GetTaille()<DIMENSION) {
 				boolean onPeutPlacer = true;
 				for(int n = 0; n < bateau.GetTaille(); n++){
-					if(plateau[coordonneeY][coordonneeX+n]==CASE_BATEAU){
+					if(plateau[coordonneeX+n][coordonneeY]==CASE_BATEAU){
 						onPeutPlacer = false;
 					}
 				}
 				if(onPeutPlacer){
 					for(int n = 0; n < bateau.GetTaille(); n++){
-						plateau[coordonneeY][coordonneeX+n]=CASE_BATEAU;
+						plateau[coordonneeX+n][coordonneeY]=CASE_BATEAU;
 					}
 				} else {
 					throw new Exception("Erreur : Case déja occupée");
@@ -44,13 +44,13 @@ public class Board {
 			if(coordonneeY+bateau.GetTaille()<DIMENSION) {
 				boolean onPeutPlacer = true;
 				for(int n = 0; n < bateau.GetTaille(); n++){
-					if(plateau[coordonneeY+n][coordonneeX]==CASE_BATEAU){
+					if(plateau[coordonneeX][coordonneeY+n]==CASE_BATEAU){
 						onPeutPlacer = false;
 					}
 				}
 				if(onPeutPlacer){
 					for(int n = 0; n < bateau.GetTaille(); n++){
-						plateau[coordonneeY+n][coordonneeX]=CASE_BATEAU;
+						plateau[coordonneeX][coordonneeY+n]=CASE_BATEAU;
 					}
 				} else {
 					throw new Exception("Erreur : Case déja occupée");
@@ -64,11 +64,16 @@ public class Board {
 	public String toString(){
 		String ret = new String();
 		ret += "Etat du board\n";
+<<<<<<< HEAD
 		ret += "   A B C D E F G H I J\n";
 		for(int i=0; i<DIMENSION;i++){
 			ret += "   ------------------- \n"+(i+1);
 			if(i<9){ret +=" |";}
 			else{ret +="|";}
+=======
+		for(int i=0; i<DIMENSION;i++){
+			ret += " ------------------- ";
+>>>>>>> a10e7baf731ffb160051c380be77c332a375bddd
 			for(int j=0; j<DIMENSION;j++){
 				if(plateau[i][j] == CASE_EAU){
 					ret += " ";
@@ -85,5 +90,39 @@ public class Board {
 		}
 		ret += "   ------------------- ";
 		return ret;
+	}
+
+	public int tir(String coordonnées){
+		int[]coordonnee=parseStringCoordonnee(coordonnées);
+	
+		
+				switch(plateau[coordonnee[0]][coordonnee[1]]){
+		    	case 1:
+		    		plateau[coordonnee[0]][coordonnee[1]]=CASE_DANS_EAU;
+		    		return plateau[coordonnee[0]][coordonnee[1]];
+		    	
+		    	case 2:
+		    		plateau[coordonnee[0]][coordonnee[1]]=CASE_TOUCHE;
+		    		return plateau[coordonnee[0]][coordonnee[1]];
+		    	case 3:
+		    		System.out.println("case déjà visée");
+		    		return -1;
+		    		
+		    	
+		    	case 4:
+		    		System.out.println("case déjà visée");
+		    		return -1;
+		    	
+		    	default:
+		            System.out.println("ERREUR");
+		            return -1;
+		       
+			
+	    
+				}
+	}
+	private int[] parseStringCoordonnee(String coordonnées) {
+		
+		return null;
 	}
 }
