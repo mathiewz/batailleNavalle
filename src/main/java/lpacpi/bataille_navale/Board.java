@@ -164,18 +164,31 @@ public class Board {
 		}
 		return ret;
 	}
-	public static int[] parseStringCoordonnee(String coordonnées){
+	public static int[] parseStringCoordonnee(String coordonnees){
 		int[] ret = new int[2];
-		if(convertCharToIndex(coordonnées) < 0 || convertCharToIndex(coordonnées) > 9 || convertCharToIndex(coordonnées)< 0|| convertCharToIndex(coordonnées) > 9){
+		if(convertCharToIndex(coordonnees) < 0 || convertCharToIndex(coordonnees) > 9 || !isNumeric(coordonnees.substring(1))){
+			ret[0] = -1;
+		}else if(Integer.valueOf(coordonnees.substring(1))-1 > 9 || Integer.valueOf(coordonnees.substring(1))-1 < 0){
 			ret[0] = -1;
 		} else {
-			ret[0] = convertCharToIndex(coordonnées);
-			ret[1] = Integer.valueOf(coordonnées.substring(1))-1;
+			ret[0] = convertCharToIndex(coordonnees);
+			ret[1] = Integer.valueOf(coordonnees.substring(1))-1;
 		}
 		return ret;
 	}
 
 	private static int convertCharToIndex(String coordonnées) {
 		return (int)coordonnées.toUpperCase().charAt(0)-65;
+	}
+	
+	public static boolean isNumeric(String str) {  
+	  try {  
+	    double d = Double.parseDouble(str);  
+	  }
+	  catch(NumberFormatException nfe)  
+	  {  
+	    return false;  
+	  }  
+	  return true;  
 	}
 }
