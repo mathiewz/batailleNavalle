@@ -74,9 +74,7 @@ public class Board {
 		ret += " ------------------- ";
 		return ret;
 	}
-<<<<<<< HEAD
-	
-=======
+
 	public int tir(String coordonnées){
 		int[]coordonnee=parseStringCoordonnee(coordonnées);
 	
@@ -110,5 +108,4 @@ public class Board {
 		
 		return null;
 	}
->>>>>>> 1c9acc860306643eb0cd47acc37f98e66f612388
 }
