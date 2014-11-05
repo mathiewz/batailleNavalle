@@ -46,7 +46,6 @@ public class Launcher{
 			System.out.println("blabla les credits.....");
 			ret = -1;
 			break;
-
 		case 3:
 			System.exit(0);
 			break;
@@ -74,7 +73,6 @@ public class Launcher{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	private static void tour(Board boardJoueur, Board boardEnnemy){

@@ -11,6 +11,7 @@ public class Board {
 	public static int CASE_BATEAU=2;
 	public static int CASE_DANS_EAU=3;
 	public static int CASE_TOUCHE=4;
+	
 
 	public static int BATEAU_COULE = 9;
 
@@ -109,8 +110,6 @@ public class Board {
 					ret += " ";
 				} else if(plateau[j][i] == CASE_DANS_EAU){
 					ret += "O";
-				} else if(plateau[j][i] == CASE_TOUCHE){
-					ret += "X";
 				}
 				ret+= "|";
 			}
@@ -143,6 +142,8 @@ public class Board {
 						} else {
 							System.out.println(bateau.GetNom()+" coulé !");
 							ret = BATEAU_COULE;
+							
+							
 						}
 					}
 				}
