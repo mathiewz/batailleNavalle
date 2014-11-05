@@ -11,11 +11,7 @@ public class Partie {
 	private Board bj2;
 
 	public Partie(){
-<<<<<<< HEAD
 		boolean vsIA = true;
-		nomJoueur1 = "j1";
-		nomJoueur2 = "j2";
-=======
 		System.out.println("saisir votre nom de Joueur");
 		Scanner sc = new Scanner(System.in);
 		String nomJoueur1=sc.nextLine();
@@ -23,22 +19,10 @@ public class Partie {
 		Scanner sc1 = new Scanner(System.in);
 		String nomJoueur2=sc1.nextLine();
 		
->>>>>>> 6f9efe7bf78cb6a8c37f516abbe26acff5425105
 		bj1 = new Board();
 		if(!vsIA){bj2 = new Board();}
 		else{bj2 = new IA();}
 		while(!bj1.isBoardGameOver() && !bj2.isBoardGameOver()){
-<<<<<<< HEAD
-			System.out.println("\nTour de "+nomJoueur1+"\n================\n\n");
-			tour(bj1, bj2,true);
-			if(!bj2.isBoardGameOver()){
-				System.out.println("\nTour de "+nomJoueur2+"\n================\n\n");
-				tour(bj2, bj1,true);
-			}
-		}
-		if(bj1.isBoardGameOver()){System.out.println("Game Over !!!\n"+nomJoueur2+" à gagné !");}
-		if(bj2.isBoardGameOver()){System.out.println("Game Over !!!\n"+nomJoueur1+" à gagné !");}
-=======
 			System.out.println("\nA "+nomJoueur1+ " de jouer !!\n================\n\n");
 			tour(bj1, bj2,true);
 			if(!bj2.isBoardGameOver()){
@@ -47,13 +31,10 @@ public class Partie {
 			}
 		}
 		if(bj2.isBoardGameOver()){
-			System.out.println("Partie terminée !!!"+nomJoueur1+" à gagné !");
-			System.out.println("");
+			System.out.println("Partie terminée !!!"+nomJoueur1+" à gagné !\n");
 		}else{
-			System.out.println("Partie terminée !!!"+nomJoueur1+" à gagné !");
-			System.out.println("");
+			System.out.println("Partie terminée !!!"+nomJoueur1+" à gagné !\n");
 		}
->>>>>>> 6f9efe7bf78cb6a8c37f516abbe26acff5425105
 	}
 
 	private void tour(Board boardJoueur, Board boardEnnemy, boolean variable){
