@@ -11,26 +11,29 @@ public class Partie {
 	private Board bj2;
 
 	public Partie(){
+		boolean vsIA = true;
 		nomJoueur1 = "j1";
-		nomJoueur1 = "j2";
+		nomJoueur2 = "j2";
 		bj1 = new Board();
-		bj2 = new Board();
+		if(!vsIA){bj2 = new Board();}
+		else{bj2 = new IA();}
 		while(!bj1.isBoardGameOver() && !bj2.isBoardGameOver()){
-			System.out.println("\nTour du Joueur 1\n================\n\n");
+			System.out.println("\nTour de "+nomJoueur1+"\n================\n\n");
 			tour(bj1, bj2,true);
 			if(!bj2.isBoardGameOver()){
-				System.out.println("\nTour du Joueur 2\n================\n\n");
+				System.out.println("\nTour de "+nomJoueur2+"\n================\n\n");
 				tour(bj2, bj1,true);
 			}
 		}
-		System.out.println("Game Over !!!\n"+nomJoueur1+" à gagné !");
+		if(bj1.isBoardGameOver()){System.out.println("Game Over !!!\n"+nomJoueur2+" à gagné !");}
+		if(bj2.isBoardGameOver()){System.out.println("Game Over !!!\n"+nomJoueur1+" à gagné !");}
 	}
 
 	private void tour(Board boardJoueur, Board boardEnnemy, boolean variable){
+
 		int tir=0;
-		int histo=0;
 		String XY = "";
-		if(variable)
+		if(!(boardJoueur instanceof IA))
 		{
 			System.out.println(boardJoueur.afficheAllie());
 			System.out.println(boardEnnemy.afficheEnnemy());
@@ -43,8 +46,7 @@ public class Partie {
 		}
 		else
 		{
-			String coordonnee=ia();
-			tir = boardEnnemy.tir(coordonnee);
+			tir = boardEnnemy.tirIA();
 		}
 		while (tir == -1 ){
 			if(variable)
@@ -59,8 +61,7 @@ public class Partie {
 			}
 			else
 			{
-				String coordonnee=ia();
-				tir = boardEnnemy.tir(coordonnee);
+				tir = ((IA)boardEnnemy).tirIA();
 
 			}
 		}       
@@ -77,18 +78,5 @@ public class Partie {
 		}
 
 	}
-	public String ia(){
-		String coordonnees;
-		String[] position= new String[]{"A","B","C","D","E","F","G","H","I","J"};
-		int lower = 0;
-		int higher = 9;
-
-		int random1 = (int)(Math.random() * (higher-lower)) + lower;
-		int random2 = (int)(Math.random() * (higher-lower)) + lower;
-		int i = random1;
-		int Y= random2;
-		coordonnees=position[i]+Y;
-		return coordonnees;
-	}
-
+	
 }

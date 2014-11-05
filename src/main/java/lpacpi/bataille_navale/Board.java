@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Board {
 	public static int DIMENSION=10;
-	private int[][] plateau = new int[DIMENSION][DIMENSION];
+	protected int[][] plateau = new int[DIMENSION][DIMENSION];
 	public static int SENS_HORIZONTAL=1;
 	public static int SENS_VERTICAL=2;
 	public static int CASE_EAU=1;
@@ -15,7 +15,7 @@ public class Board {
 
 	public static int BATEAU_COULE = 9;
 
-	private ArrayList<Bateau> listBateaux;
+	protected ArrayList<Bateau> listBateaux;
 
 	public Board()	{
 		for(int i=0; i<DIMENSION;i++){
@@ -52,7 +52,7 @@ public class Board {
 		}
 
 		if(bateau.getSens()==SENS_VERTICAL){
-			if(bateau.getX()+bateau.GetTaille()<DIMENSION) {
+			if(bateau.getY()+bateau.GetTaille()<DIMENSION) {
 				boolean onPeutPlacer = true;
 				for(int n = 0; n < bateau.GetTaille(); n++){
 					if(plateau[bateau.getX()][bateau.getY()+n]==CASE_BATEAU){
@@ -125,6 +125,7 @@ public class Board {
 	}
 
 	public int tir(String coordonnees){
+		System.out.println("tir en "+coordonnees);
 		int[]coordonnee=parseStringCoordonnee(coordonnees);
 		int ret = 0;
 		if(coordonnee[0] == -1 || coordonnee[0]>=DIMENSION || coordonnee[1] >= DIMENSION){
@@ -141,7 +142,7 @@ public class Board {
 				for(Bateau bateau : listBateaux){
 					if(bateau.isThisBateauAtThisPlace(coordonnees)){
 						bateau.retirerVie();
-						if(!bateau.estCoulé()){
+						if(!bateau.estCoule()){
 							System.out.println("Touché !");
 							ret = CASE_TOUCHE;
 						} else {
@@ -252,10 +253,27 @@ public class Board {
 	public boolean isBoardGameOver(){
 		boolean ret = true;
 		for(Bateau bateau : listBateaux){
-			if(!bateau.estCoulé()){
+			if(!bateau.estCoule()){
 				ret = false;
 			}
 		}
 		return ret;
+	}
+	
+	public int tirIA(){
+		return tir(generateRandomCordonees());
+	}
+	
+	protected String generateRandomCordonees(){
+		int lower = 0;
+		int higher = 9;
+		
+		int random1 = (int)(Math.random() * (higher-lower)) + lower;
+		int random2 = (int)(Math.random() * (higher-lower)) + lower;
+		String coordonnees ="";
+		String[] position= new String[]{"A","B","C","D","E","F","G","H","I","J"};
+		coordonnees += position[random1];
+		coordonnees += String.valueOf(random2+1);
+		return coordonnees;
 	}
 }
