@@ -19,6 +19,8 @@ public class Launcher{
 		Board j2 = new Board();
 		placerBateau(j1);
 		placerBateau(j2);
+		
+		isNotGameOver = finJeu();
 		while(isNotGameOver){
 			System.out.println("\nTour du Joueur 1\n================\n\n");
 			tour(j1, j2);
@@ -28,8 +30,11 @@ public class Launcher{
 			}
 		}
 		System.out.println("Game Over !!!");
+		
 	}
 	
+
+
 	private static int menu(){
 		System.out.println("1-jeux");
 		System.out.println("2-credit");
@@ -63,6 +68,7 @@ public class Launcher{
 			int[] dimBateau=new int[]{2,3,3,4,5};
 			boolean test;
 			Scanner sc = new Scanner(System.in);
+		
 			for(int i=0;i<5;i++){
 				test=false;
 				while (!test)
@@ -133,6 +139,17 @@ public class Launcher{
 				tour(boardJoueur, boardEnnemy);    		
 			}
 		}
-
 	}
+	
+	private static boolean finJeu() {		
+		if(Board.nbBateauCoule() != 0){		
+		return true;
+		}
+		return false;
+	}
+	
+	
+	
+	
+	
 }
