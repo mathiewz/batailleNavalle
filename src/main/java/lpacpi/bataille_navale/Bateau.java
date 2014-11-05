@@ -7,7 +7,7 @@ public class Bateau {
 	private int posX;
 	private int posY;
 	private int sens;
-	private int nbCasesPasTouchees;
+	private static int nbCasesPasTouchees;
 	
 	public Bateau(int uneTaille, String unNom, int posX, int posY, int sens)
 	{
@@ -66,9 +66,10 @@ public class Bateau {
 		 return nbCasesPasTouchees;
 	 }
 	 
-	 public boolean estCoulé(){
+	 public static boolean estCoulé(){
 		 return (nbCasesPasTouchees == 0);
 	 }
 	
-	
+
+	 
 } 

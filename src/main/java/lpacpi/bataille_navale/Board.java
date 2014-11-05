@@ -15,7 +15,7 @@ public class Board {
 
 	public static int BATEAU_COULE = 9;
 
-	private ArrayList<Bateau> listBateaux;
+	public static  ArrayList<Bateau> listBateaux;
 
 	public Board()	{
 		for(int i=0; i<DIMENSION;i++){
@@ -192,4 +192,16 @@ public class Board {
 	  }  
 	  return true;  
 	}
+	
+	
+	public static int nbBateauCoule(){
+		int t = 5;	
+		for(int i = 0; i< listBateaux.size() ; i++){
+		if( Bateau.estCoulé()== true){
+			t --;
+		}
+		}		 
+		return t;		
+	}
+	
 }

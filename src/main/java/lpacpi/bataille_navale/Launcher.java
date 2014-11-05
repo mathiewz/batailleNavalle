@@ -41,8 +41,11 @@ public class Launcher{
 		System.out.println("3-Quitter");
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Veuillez saisir un numéro(1,2,3) :");
-		int str = Integer.valueOf(sc.nextLine());
 		int ret = 0;
+		if(isInt(sc.nextLine()))
+		{	
+		int str = Integer.valueOf(sc.nextLine());
+		
 		switch(str){
 		case 1:
 			ret = 0;
@@ -58,6 +61,12 @@ public class Launcher{
 			System.out.println("Saisie non valide");
 			ret = -1;
 			break;
+		}
+		}
+		else
+		{
+			System.out.println("Saisie non valide");
+			ret=-1;
 		}
 		return ret;
 	}
@@ -140,6 +149,7 @@ public class Launcher{
 			}
 		}
 	}
+<<<<<<< HEAD
 	
 	private static boolean finJeu() {		
 		if(Board.nbBateauCoule() != 0){		
@@ -152,4 +162,16 @@ public class Launcher{
 	
 	
 	
+=======
+	public static boolean isInt(String chaine){
+		boolean valeur = true;
+		char[] tab = chaine.toCharArray();
+
+		for(char carac : tab){
+		if(!Character.isDigit(carac) && valeur){ valeur = false; }
+		}
+
+		return valeur;
+		} 
+>>>>>>> 1497e304f358a668d9fa70acd6e78d85b1c84c28
 }
