@@ -168,7 +168,6 @@ public class Board {
 	}
 	public static int[] parseStringCoordonnee(String coordonnees){
 		int[] ret = new int[2];
-		System.out.println(coordonnees);
 		if(coordonnees.length() <= 0){
 			ret[0] = -1;
 		}else if(convertCharToIndex(coordonnees) < 0 || convertCharToIndex(coordonnees) > 9 || !isNumeric(coordonnees.substring(1))){
