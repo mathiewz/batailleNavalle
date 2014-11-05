@@ -11,11 +11,10 @@ public class Board {
 	public static int CASE_BATEAU=2;
 	public static int CASE_DANS_EAU=3;
 	public static int CASE_TOUCHE=4;
-	
 
 	public static int BATEAU_COULE = 9;
 
-	public static  ArrayList<Bateau> listBateaux;
+	private ArrayList<Bateau> listBateaux;
 
 	public Board()	{
 		for(int i=0; i<DIMENSION;i++){
@@ -25,8 +24,9 @@ public class Board {
 		}
 		listBateaux = new ArrayList<Bateau>();
 	}
-	public void placerBateau(Bateau bateau) throws Exception
+	public int placerBateau(Bateau bateau) throws Exception
 	{
+		int ret = 0;
 		if(bateau.getSens()==SENS_HORIZONTAL){
 			if(bateau.getX()+bateau.GetTaille()<DIMENSION) {
 				boolean onPeutPlacer = true;
@@ -41,10 +41,10 @@ public class Board {
 					}
 					listBateaux.add(bateau);
 				} else {
-					throw new Exception("Erreur : Case déja occupée");
+					ret = -1;
 				}
 			} else {
-				throw new Exception ("Erreur : Le bateau dépasse du plateau !");
+				ret = -2;
 			}
 
 		}
@@ -63,12 +63,13 @@ public class Board {
 					}
 					listBateaux.add(bateau);
 				} else {
-					throw new Exception("Erreur : Case déja occupée");
+					ret = -1;
 				}
 			} else {
-				throw new Exception ("Erreur : Le bateau dépasse du plateau !");
+				ret = -2;
 			}
 		}
+		return ret;
 	}
 
 	public String afficheAllie(){
@@ -110,6 +111,8 @@ public class Board {
 					ret += " ";
 				} else if(plateau[j][i] == CASE_DANS_EAU){
 					ret += "O";
+				} else if(plateau[j][i] == CASE_TOUCHE){
+					ret += "X";
 				}
 				ret+= "|";
 			}
@@ -142,8 +145,6 @@ public class Board {
 						} else {
 							System.out.println(bateau.GetNom()+" coulé !");
 							ret = BATEAU_COULE;
-							
-							
 						}
 					}
 				}
@@ -167,7 +168,9 @@ public class Board {
 	}
 	public static int[] parseStringCoordonnee(String coordonnees){
 		int[] ret = new int[2];
-		if(convertCharToIndex(coordonnees) < 0 || convertCharToIndex(coordonnees) > 9 || !isNumeric(coordonnees.substring(1))){
+		if(coordonnees.length() <= 0){
+			ret[0] = -1;
+		}else if(convertCharToIndex(coordonnees) < 0 || convertCharToIndex(coordonnees) > 9 || !isNumeric(coordonnees.substring(1))){
 			ret[0] = -1;
 		}else if(Integer.valueOf(coordonnees.substring(1))-1 > 9 || Integer.valueOf(coordonnees.substring(1))-1 < 0){
 			ret[0] = -1;
@@ -192,16 +195,4 @@ public class Board {
 	  }  
 	  return true;  
 	}
-	
-	
-	public static int nbBateauCoule(){
-		int t = 5;	
-		for(int i = 0; i< listBateaux.size() ; i++){
-		if( Bateau.estCoulé()== true){
-			t --;
-		}
-		}		 
-		return t;		
-	}
-	
 }
