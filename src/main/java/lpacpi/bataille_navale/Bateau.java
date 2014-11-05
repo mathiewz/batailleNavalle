@@ -66,7 +66,7 @@ public class Bateau {
 		 return nbCasesPasTouchees;
 	 }
 	 
-	 public boolean estCoulé(){
+	 public boolean estCoule(){
 		 return (nbCasesPasTouchees == 0);
 	 }
 	

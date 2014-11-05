@@ -11,26 +11,56 @@ public class Partie {
 	private Board bj2;
 
 	public Partie(){
+<<<<<<< HEAD
+		boolean vsIA = true;
 		nomJoueur1 = "j1";
-		nomJoueur1 = "j2";
+		nomJoueur2 = "j2";
+=======
+		System.out.println("saisir votre nom de Joueur");
+		Scanner sc = new Scanner(System.in);
+		String nomJoueur1=sc.nextLine();
+		System.out.println("saisir le nom de l'adversaire");
+		Scanner sc1 = new Scanner(System.in);
+		String nomJoueur2=sc1.nextLine();
+		
+>>>>>>> 6f9efe7bf78cb6a8c37f516abbe26acff5425105
 		bj1 = new Board();
-		bj2 = new Board();
+		if(!vsIA){bj2 = new Board();}
+		else{bj2 = new IA();}
 		while(!bj1.isBoardGameOver() && !bj2.isBoardGameOver()){
-			System.out.println("\nTour du Joueur 1\n================\n\n");
+<<<<<<< HEAD
+			System.out.println("\nTour de "+nomJoueur1+"\n================\n\n");
 			tour(bj1, bj2,true);
 			if(!bj2.isBoardGameOver()){
-				System.out.println("\nTour du Joueur 2\n================\n\n");
+				System.out.println("\nTour de "+nomJoueur2+"\n================\n\n");
 				tour(bj2, bj1,true);
 			}
 		}
-		System.out.println("Game Over !!!\n"+nomJoueur1+" à gagné !");
+		if(bj1.isBoardGameOver()){System.out.println("Game Over !!!\n"+nomJoueur2+" à gagné !");}
+		if(bj2.isBoardGameOver()){System.out.println("Game Over !!!\n"+nomJoueur1+" à gagné !");}
+=======
+			System.out.println("\nA "+nomJoueur1+ " de jouer !!\n================\n\n");
+			tour(bj1, bj2,true);
+			if(!bj2.isBoardGameOver()){
+				System.out.println("\nA "+ nomJoueur2+ " de jouer !!\n================\n\n");
+				tour(bj2, bj1,true);
+			}
+		}
+		if(bj2.isBoardGameOver()){
+			System.out.println("Partie terminée !!!"+nomJoueur1+" à gagné !");
+			System.out.println("");
+		}else{
+			System.out.println("Partie terminée !!!"+nomJoueur1+" à gagné !");
+			System.out.println("");
+		}
+>>>>>>> 6f9efe7bf78cb6a8c37f516abbe26acff5425105
 	}
 
 	private void tour(Board boardJoueur, Board boardEnnemy, boolean variable){
+
 		int tir=0;
-		int histo=0;
 		String XY = "";
-		if(variable)
+		if(!(boardJoueur instanceof IA))
 		{
 			System.out.println(boardJoueur.afficheAllie());
 			System.out.println(boardEnnemy.afficheEnnemy());
@@ -43,8 +73,7 @@ public class Partie {
 		}
 		else
 		{
-			String coordonnee=ia();
-			tir = boardEnnemy.tir(coordonnee);
+			tir = boardEnnemy.tirIA();
 		}
 		while (tir == -1 ){
 			if(variable)
@@ -59,8 +88,7 @@ public class Partie {
 			}
 			else
 			{
-				String coordonnee=ia();
-				tir = boardEnnemy.tir(coordonnee);
+				tir = ((IA)boardEnnemy).tirIA();
 
 			}
 		}       
@@ -77,18 +105,5 @@ public class Partie {
 		}
 
 	}
-	public String ia(){
-		String coordonnees;
-		String[] position= new String[]{"A","B","C","D","E","F","G","H","I","J"};
-		int lower = 0;
-		int higher = 9;
-
-		int random1 = (int)(Math.random() * (higher-lower)) + lower;
-		int random2 = (int)(Math.random() * (higher-lower)) + lower;
-		int i = random1;
-		int Y= random2;
-		coordonnees=position[i]+Y;
-		return coordonnees;
-	}
-
+	
 }
