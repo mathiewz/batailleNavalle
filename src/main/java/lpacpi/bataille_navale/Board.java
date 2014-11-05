@@ -24,8 +24,9 @@ public class Board {
 		}
 		listBateaux = new ArrayList<Bateau>();
 	}
-	public void placerBateau(Bateau bateau) throws Exception
+	public int placerBateau(Bateau bateau) throws Exception
 	{
+		int ret = 0;
 		if(bateau.getSens()==SENS_HORIZONTAL){
 			if(bateau.getX()+bateau.GetTaille()<DIMENSION) {
 				boolean onPeutPlacer = true;
@@ -40,10 +41,10 @@ public class Board {
 					}
 					listBateaux.add(bateau);
 				} else {
-					throw new Exception("Erreur : Case déja occupée");
+					ret = -1;
 				}
 			} else {
-				throw new Exception ("Erreur : Le bateau dépasse du plateau !");
+				ret = -2;
 			}
 
 		}
@@ -62,12 +63,13 @@ public class Board {
 					}
 					listBateaux.add(bateau);
 				} else {
-					throw new Exception("Erreur : Case déja occupée");
+					ret = -1;
 				}
 			} else {
-				throw new Exception ("Erreur : Le bateau dépasse du plateau !");
+				ret = -2;
 			}
 		}
+		return ret;
 	}
 
 	public String afficheAllie(){
@@ -166,7 +168,10 @@ public class Board {
 	}
 	public static int[] parseStringCoordonnee(String coordonnees){
 		int[] ret = new int[2];
-		if(convertCharToIndex(coordonnees) < 0 || convertCharToIndex(coordonnees) > 9 || !isNumeric(coordonnees.substring(1))){
+		System.out.println(coordonnees);
+		if(coordonnees.length() <= 0){
+			ret[0] = -1;
+		}else if(convertCharToIndex(coordonnees) < 0 || convertCharToIndex(coordonnees) > 9 || !isNumeric(coordonnees.substring(1))){
 			ret[0] = -1;
 		}else if(Integer.valueOf(coordonnees.substring(1))-1 > 9 || Integer.valueOf(coordonnees.substring(1))-1 < 0){
 			ret[0] = -1;
