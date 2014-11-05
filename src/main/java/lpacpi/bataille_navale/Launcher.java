@@ -19,12 +19,6 @@ public class Launcher{
 		Board j2 = new Board();
 		placerBateau(j1);
 		placerBateau(j2);
-		//    	try {
-		//			j2.placerBateau(new Bateau(2, "bla", 4, 7, Board.SENS_VERTICAL));
-		//		} catch (Exception e) {
-		//			// TODO Auto-generated catch block
-		//			e.printStackTrace();
-		//		}
 		while(isNotGameOver){
 			System.out.println("\nTour du Joueur 1\n================\n\n");
 			tour(j1, j2);
@@ -35,6 +29,7 @@ public class Launcher{
 		}
 		System.out.println("Game Over !!!");
 	}
+	
 	private static int menu(){
 		System.out.println("1-jeux");
 		System.out.println("2-credit");
@@ -47,7 +42,6 @@ public class Launcher{
 		case 1:
 			ret = 0;
 			break;
-
 		case 2:
 			System.out.println("blabla les credits.....");
 			ret = -1;
