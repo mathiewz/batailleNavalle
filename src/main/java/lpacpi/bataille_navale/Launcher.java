@@ -62,16 +62,44 @@ public class Launcher{
 		try {
 			String[] nomBateau=new String[]{"torpilleur","sous-marin","contre-torpilleur","croiseur","porte-avions"};
 			int[] dimBateau=new int[]{2,3,3,4,5};
+			boolean test;
 			Scanner sc = new Scanner(System.in);
 			for(int i=0;i<5;i++){
-				System.out.println("Veuillez saisir coordonnée "+nomBateau[i]+" :");
+				test=false;
+				while (!test)
+				{
+				System.out.println("Veuillez saisir coordonnées du "+nomBateau[i]+" :");
 				int[] coordonee = Board.parseStringCoordonnee(sc.nextLine());
 				sc = new Scanner(System.in);
-				System.out.println("Veuillez saisir sens torpilleur (horizontal=1 et vertical=2):");
+				System.out.println("Veuillez saisir sens "+nomBateau[i]+" (horizontal=1 et vertical=2):");
 				int sens = Integer.valueOf(sc.nextLine());
+				if(sens==Board.SENS_HORIZONTAL){
+					if(coordonee[0]+dimBateau[i]<Board.DIMENSION) {
 				board.placerBateau(new Bateau(dimBateau[i], nomBateau[i], coordonee[0], coordonee[1], sens));
-			}
-		} catch (Exception e) {
+				test=true;
+					}
+					else
+					{
+						test=false;
+						System.out.println("hors limite");
+					}
+					
+				}
+				else
+				{
+					if(coordonee[1]+dimBateau[i]<Board.DIMENSION) {
+						board.placerBateau(new Bateau(dimBateau[i], nomBateau[i], coordonee[0], coordonee[1], sens));
+						test=true;
+							}
+							else
+							{
+								test=false;
+								System.out.println("hors limite");
+							}
+				
+				
+		}}}}
+		 catch (Exception e) {
 			e.printStackTrace();
 		}
 
