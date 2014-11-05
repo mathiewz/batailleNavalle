@@ -1,6 +1,7 @@
 package lpacpi.bataille_navale;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Board {
 	public static int DIMENSION=10;
@@ -23,6 +24,7 @@ public class Board {
 			}
 		}
 		listBateaux = new ArrayList<Bateau>();
+		initialiserBateaux();
 	}
 	public int placerBateau(Bateau bateau) throws Exception
 	{
@@ -180,6 +182,57 @@ public class Board {
 		}
 		return ret;
 	}
+	
+	public void initialiserBateaux(){
+		try {
+			String[] nomBateau=new String[]{"torpilleur","sous-marin","contre-torpilleur","croiseur","porte-avions"};
+			int[] dimBateau=new int[]{2,3,3,4,5};
+			for(int i=0;i<5;i++){
+				boolean isBateauPlace = false;
+				do{
+					boolean isPLacementValide;
+					int[] coordonee;
+					int sens = -1;
+					String err;
+					do{
+						err = "";
+						isPLacementValide = false;
+						Scanner sc = new Scanner(System.in);
+						System.out.println("Veuillez saisir coordonnées du "+nomBateau[i]+" :");
+						coordonee = Board.parseStringCoordonnee(sc.nextLine());
+						if(coordonee[0] == -1){
+							err += "Les coordonées du bateau ne sont pas valides";
+						} else {
+							sc = new Scanner(System.in);
+							System.out.println("Veuillez saisir sens "+nomBateau[i]+" (horizontal=1 et vertical=2):");
+							String value = sc.nextLine();
+							if(Board.isNumeric(value)){
+								sens = Integer.valueOf(value);
+								if(sens == 1 || sens ==2){isPLacementValide = true;}
+								else{err += "La saisie du sens n'est pas valide (1 ou 2)\n";}
+							} else {
+								err += "La saisie du sens n'est pas valide\n";
+							}
+						}
+						System.out.println(err);
+					}while(!isPLacementValide);
+
+					int placementErr = this.placerBateau(new Bateau(dimBateau[i], nomBateau[i], coordonee[0], coordonee[1], sens));
+					if(placementErr == -1){
+						System.out.println("Case déjà occupée par un autre bateau");
+					} else if(placementErr == -2){
+						System.out.println("Le bateau dépasse du plateau");
+					} else {
+						isBateauPlace = true;
+					}
+				}while(!isBateauPlace);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 	private static int convertCharToIndex(String coordonnées) {
 		return (int)coordonnées.toUpperCase().charAt(0)-65;
@@ -194,5 +247,15 @@ public class Board {
 	    return false;  
 	  }  
 	  return true;  
+	}
+	
+	public boolean isBoardGameOver(){
+		boolean ret = true;
+		for(Bateau bateau : listBateaux){
+			if(!bateau.estCoulé()){
+				ret = false;
+			}
+		}
+		return ret;
 	}
 }
