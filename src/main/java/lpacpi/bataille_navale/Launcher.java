@@ -98,6 +98,7 @@ public class Launcher{
 							if(Board.isNumeric(value)){
 								sens = Integer.valueOf(value);
 								if(sens == 1 || sens ==2){isPLacementValide = true;}
+								else{err += "La saisie du sens n'est pas valide (1 ou 2)\n";}
 							} else {
 								err += "La saisie du sens n'est pas valide\n";
 							}
