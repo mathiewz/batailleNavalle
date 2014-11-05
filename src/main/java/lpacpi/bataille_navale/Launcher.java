@@ -20,7 +20,7 @@ public class Launcher{
 		placerBateau(j1);
 		placerBateau(j2);
 		
-		isNotGameOver = finJeu();
+		//isNotGameOver = finJeu();
 		while(isNotGameOver){
 			System.out.println("\nTour du Joueur 1\n================\n\n");
 			tour(j1, j2);
@@ -42,9 +42,10 @@ public class Launcher{
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Veuillez saisir un numéro(1,2,3) :");
 		int ret = 0;
-		if(isInt(sc.nextLine()))
+		String valeur= sc.nextLine();
+		if(isInt(valeur))
 		{	
-		int str = Integer.valueOf(sc.nextLine());
+		int str = Integer.valueOf(valeur);
 		
 		switch(str){
 		case 1:
@@ -149,8 +150,6 @@ public class Launcher{
 			}
 		}
 	}
-<<<<<<< HEAD
-	
 	private static boolean finJeu() {		
 		if(Board.nbBateauCoule() != 0){		
 		return true;
@@ -158,11 +157,6 @@ public class Launcher{
 		return false;
 	}
 	
-	
-	
-	
-	
-=======
 	public static boolean isInt(String chaine){
 		boolean valeur = true;
 		char[] tab = chaine.toCharArray();
@@ -173,5 +167,5 @@ public class Launcher{
 
 		return valeur;
 		} 
->>>>>>> 1497e304f358a668d9fa70acd6e78d85b1c84c28
+
 }
