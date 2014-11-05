@@ -22,7 +22,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>lpacpi.bataille_navale.App</mainClass>
+							<mainClass>lpacpi.bataille_navale.launcher</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
