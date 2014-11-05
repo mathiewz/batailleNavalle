@@ -1,5 +1,6 @@
 package lpacpi.bataille_navale;
 
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -10,6 +11,7 @@ public class Launcher{
 
 	public static void main( String[] args ){
 		boolean isNotGameOver = true;
+		boolean variable=true;
 		System.out.println( "Bienvenue dans la bataille navale!" );
 		int menu = -1;
 		while (menu==-1){
@@ -20,11 +22,13 @@ public class Launcher{
 		placerBateau(j1);
 		placerBateau(j2);
 		while(isNotGameOver){
+			variable=true;
 			System.out.println("\nTour du Joueur 1\n================\n\n");
-			tour(j1, j2);
+			tour(j1, j2,variable);
 			if(isNotGameOver){
 				System.out.println("\nTour du Joueur 2\n================\n\n");
-				tour(j2, j1);
+				variable=false;
+				tour(j2, j1,variable);
 			}
 		}
 		System.out.println("Game Over !!!");
@@ -37,9 +41,10 @@ public class Launcher{
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Veuillez saisir un numéro(1,2,3) :");
 		int ret = 0;
-		if(isInt(sc.nextLine()))
+		String valeurClavier=sc.nextLine();
+		if(isInt(valeurClavier))
 		{	
-		int str = Integer.valueOf(sc.nextLine());
+		int str = Integer.valueOf(valeurClavier);
 		
 		switch(str){
 		case 1:
@@ -114,24 +119,43 @@ public class Launcher{
 
 	}
 
-	private static void tour(Board boardJoueur, Board boardEnnemy){
+	private static void tour(Board boardJoueur, Board boardEnnemy, boolean variable){
+		int tir=0;
+		int histo=0;
+		String XY = "";
+		if(variable)
+		{
 		System.out.println(boardJoueur.afficheAllie());
 		System.out.println(boardEnnemy.afficheEnnemy());
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Saisir les coordonnées du tir  ");
-		String XY = "";
+		
 		XY = sc.nextLine();
-
-		int tir = boardEnnemy.tir(XY); 
+		
+		tir = boardEnnemy.tir(XY); 
+		}
+		else
+		{
+		String coordonnee=ia();
+		tir = boardEnnemy.tir(coordonnee);
+		}
 		while (tir == -1 ){
+			if(variable)
+			{
 			System.out.println("Saisie non valable !!");
-			sc = new Scanner(System.in);
+			Scanner sc = new Scanner(System.in);
 			System.out.println("Saisir les coordonnées du tir  ");
 			XY = "";
 			XY = sc.nextLine();
 
 			tir = boardEnnemy.tir(XY); 
-
+			}
+			else
+			{
+			String coordonnee=ia();
+			tir = boardEnnemy.tir(coordonnee);
+			
+			}
 		}       
 		if (tir == Board.BATEAU_COULE){
 
@@ -141,10 +165,23 @@ public class Launcher{
 			}
 			else if (tir == Board.BATEAU_COULE){
 				System.out.println("Le bateau ennemi à coulé  !!");
-				tour(boardJoueur, boardEnnemy);    		
+				tour(boardJoueur, boardEnnemy,variable);    		
 			}
 		}
 
+	}
+	public static String ia(){
+		String coordonnees;
+		String[] position= new String[]{"A","B","C","D","E","F","G","H","I","J"};
+		int lower = 0;
+		int higher = 9;
+
+		int random1 = (int)(Math.random() * (higher-lower)) + lower;
+		int random2 = (int)(Math.random() * (higher-lower)) + lower;
+		int i = random1;
+		int Y= random2;
+		coordonnees=position[i]+Y;
+		return coordonnees;
 	}
 	public static boolean isInt(String chaine){
 		boolean valeur = true;
