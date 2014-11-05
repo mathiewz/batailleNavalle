@@ -11,19 +11,30 @@ public class Partie {
 	private Board bj2;
 
 	public Partie(){
-		nomJoueur1 = "j1";
-		nomJoueur1 = "j2";
+		System.out.println("saisir votre nom de Joueur");
+		Scanner sc = new Scanner(System.in);
+		String nomJoueur1=sc.nextLine();
+		System.out.println("saisir le nom de l'adversaire");
+		Scanner sc1 = new Scanner(System.in);
+		String nomJoueur2=sc1.nextLine();
+		
 		bj1 = new Board();
 		bj2 = new Board();
 		while(!bj1.isBoardGameOver() && !bj2.isBoardGameOver()){
-			System.out.println("\nTour du Joueur 1\n================\n\n");
+			System.out.println("\nA "+nomJoueur1+ " de jouer !!\n================\n\n");
 			tour(bj1, bj2,true);
 			if(!bj2.isBoardGameOver()){
-				System.out.println("\nTour du Joueur 2\n================\n\n");
+				System.out.println("\nA "+ nomJoueur2+ " de jouer !!\n================\n\n");
 				tour(bj2, bj1,true);
 			}
 		}
-		System.out.println("Game Over !!!\n"+nomJoueur1+" à gagné !");
+		if(bj2.isBoardGameOver()){
+			System.out.println("Partie terminée !!!"+nomJoueur1+" à gagné !");
+			System.out.println("");
+		}else{
+			System.out.println("Partie terminée !!!"+nomJoueur1+" à gagné !");
+			System.out.println("");
+		}
 	}
 
 	private void tour(Board boardJoueur, Board boardEnnemy, boolean variable){
