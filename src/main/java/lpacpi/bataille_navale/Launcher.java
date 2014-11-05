@@ -36,8 +36,11 @@ public class Launcher{
 		System.out.println("3-Quitter");
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Veuillez saisir un numéro(1,2,3) :");
-		int str = Integer.valueOf(sc.nextLine());
 		int ret = 0;
+		if(isInt(sc.nextLine()))
+		{	
+		int str = Integer.valueOf(sc.nextLine());
+		
 		switch(str){
 		case 1:
 			ret = 0;
@@ -54,6 +57,12 @@ public class Launcher{
 			System.out.println("Saisie non valide");
 			ret = -1;
 			break;
+		}
+		}
+		else
+		{
+			System.out.println("Saisie non valide");
+			ret=-1;
 		}
 		return ret;
 	}
@@ -137,4 +146,14 @@ public class Launcher{
 		}
 
 	}
+	public static boolean isInt(String chaine){
+		boolean valeur = true;
+		char[] tab = chaine.toCharArray();
+
+		for(char carac : tab){
+		if(!Character.isDigit(carac) && valeur){ valeur = false; }
+		}
+
+		return valeur;
+		} 
 }
