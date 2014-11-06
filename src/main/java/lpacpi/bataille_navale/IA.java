@@ -33,7 +33,6 @@ public class IA extends Board{
 						int higher = 3;
 						sens = (int)(Math.random() * (higher-lower)) + lower;
 					}
-					System.out.println(dimBateau[i]+" "+nomBateau[i]+" "+coordonee[0]+" "+coordonee[1]+" "+sens);
 					int placementErr = this.placerBateau(new Bateau(dimBateau[i], nomBateau[i], coordonee[0], coordonee[1], sens));
 					if(placementErr == -1){
 					} else if(placementErr == -2){
