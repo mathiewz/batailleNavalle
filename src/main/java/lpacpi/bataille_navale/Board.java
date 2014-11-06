@@ -278,6 +278,12 @@ public class Board {
 		int resultatTir= tir(coordonnees);
 		if(resultatTir==CASE_TOUCHE){
 			listCaseToucheIA.add(coordonnees);
+		} else if(resultatTir==BATEAU_COULE){
+			listCaseToucheIA.remove(listCaseToucheIA.size()-1);
+		}
+		if(resultatTir==-1)
+		{
+			return this.tirIA();
 		}
 		return resultatTir;
 	}
@@ -287,7 +293,7 @@ public class Board {
 		if(listCaseToucheIA.isEmpty()){
 			coordonnees=generateRandomCordonees();
 		}else{
-			String coordonneesDejaTouche = listCaseToucheIA.iterator().next();
+			String coordonneesDejaTouche = listCaseToucheIA.get(listCaseToucheIA.size()-1);
 			coordonnees=tirAutourTouche(coordonneesDejaTouche);
 			if(coordonnees.equals("")){
 				listCaseToucheIA.remove(coordonneesDejaTouche);
