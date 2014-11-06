@@ -16,6 +16,7 @@ public class Board {
 	public static int BATEAU_COULE = 9;
 
 	protected ArrayList<Bateau> listBateaux;
+	private ArrayList<String> listCaseToucheIA;
 
 	public Board()	{
 		for(int i=0; i<DIMENSION;i++){
@@ -25,6 +26,7 @@ public class Board {
 		}
 		listBateaux = new ArrayList<Bateau>();
 		initialiserBateaux();
+		listCaseToucheIA = new ArrayList<String>();
 	}
 	public int placerBateau(Bateau bateau) throws Exception
 	{
@@ -272,21 +274,27 @@ public class Board {
 	}
 
 	public int tirIA(){
-		String coordonnees="";
-		if(listCaseToucheIA.isEmpty())
-		{
-		 coordonnees=generateRandomCordonees();
-		}
-		else
-		{
-			String coordonneesDejaTouche = listCaseToucheIA.iterator().next();
-			coordonnees=tirAutourTouche(coordonneesDejaTouche);
-		}
+		String coordonnees = getCoordonneesTirIA();
 		int resultatTir= tir(coordonnees);
 		if(resultatTir==CASE_TOUCHE){
 			listCaseToucheIA.add(coordonnees);
 		}
 		return resultatTir;
+	}
+	
+	private String getCoordonneesTirIA(){
+		String coordonnees="";
+		if(listCaseToucheIA.isEmpty()){
+			coordonnees=generateRandomCordonees();
+		}else{
+			String coordonneesDejaTouche = listCaseToucheIA.iterator().next();
+			coordonnees=tirAutourTouche(coordonneesDejaTouche);
+			if(coordonnees.equals("")){
+				listCaseToucheIA.remove(coordonneesDejaTouche);
+				coordonnees = getCoordonneesTirIA();
+			}
+		}
+		return coordonnees;
 	}
 
 	protected String generateRandomCordonees(){
@@ -301,27 +309,33 @@ public class Board {
 		coordonnees += String.valueOf(random2+1);
 		return coordonnees;
 	}
-<<<<<<< HEAD
-=======
+
 	public String tirAutourTouche(String c){
 		int[] coordonneeTouche = parseStringCoordonnee(c);
-		int[][] tabResultat =new int[][]{
-			new int[]{coordonneeTouche[0]-1, coordonneeTouche[1]}, 
-			new int[]{coordonneeTouche[0]+1, coordonneeTouche[1]}, 
-			new int[]{coordonneeTouche[0], coordonneeTouche[1]-1}, 
-			new int[]{coordonneeTouche[0], coordonneeTouche[1]+1}
-		};
-		//Vider cases pas valides du tableau//
-		
+		ArrayList<Integer[]> coordonneePossible = new ArrayList<Integer[]>();
+		coordonneePossible.add(new Integer[]{coordonneeTouche[0]-1, coordonneeTouche[1]});
+		coordonneePossible.add(new Integer[]{coordonneeTouche[0]+1, coordonneeTouche[1]});
+		coordonneePossible.add(new Integer[]{coordonneeTouche[0], coordonneeTouche[1]+1});
+		coordonneePossible.add(new Integer[]{coordonneeTouche[0], coordonneeTouche[1]-1});
+		ArrayList<Integer[]> choixRestant = new ArrayList<Integer[]>();
+		for(Integer[] i : coordonneePossible){
+			if(i[0]>=0 && i[0]< DIMENSION && i[1]>=0 && i[1]< DIMENSION && !(plateau[i[0]][i[1]]==CASE_DANS_EAU) && !(plateau[i[0]][i[1]]==CASE_TOUCHE)){
+				choixRestant.add(i);
+			} 
+		}
+
 		String coordonnees ="";
-		String[] position= new String[]{"A","B","C","D","E","F","G","H","I","J"};
-		coordonnees += position[random1];
-		lower= coordonneeTouche[1]-1;
-		higher=coordonneeTouche[1]+2;
-		random1 = (int)(Math.random() * (higher-lower)) + lower;
-		coordonnees += String.valueOf(random1+1);
+
+		if(!choixRestant.isEmpty()){
+			int lower = 0;
+			int higher = choixRestant.size();
+
+			Integer[] i = choixRestant.get((int)(Math.random() * (higher-lower)) + lower);
+			String[] position= new String[]{"A","B","C","D","E","F","G","H","I","J"};
+			coordonnees += position[i[0]];
+			coordonnees += String.valueOf(i[1]+1);
+		}
 		return coordonnees;
-		
+
 	}
->>>>>>> 8a2306afc4155932f4155241881b8f630220bd21
 }

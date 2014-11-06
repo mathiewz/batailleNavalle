@@ -80,7 +80,6 @@ public class Partie {
 
 		}
 		else if (tir == Board.BATEAU_COULE){
-			System.out.println("Le bateau ennemi à coulé  !!");
 			if(!boardEnnemy.isBoardGameOver()){
 				tour(boardJoueur, boardEnnemy,variable);
 			}
