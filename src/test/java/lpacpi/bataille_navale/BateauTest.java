@@ -11,7 +11,6 @@ public class BateauTest {
 
 	@Test
 	public void testTaille() {
-
 		Bateau bateauTestPetit = new Bateau(2, "barque", 0, 0, Board.SENS_HORIZONTAL);
 		Bateau bateauTestGrand = new Bateau(5, "paquebot", 3, 3, Board.SENS_VERTICAL);
 		assertEquals(2, bateauTestPetit.GetTaille());
