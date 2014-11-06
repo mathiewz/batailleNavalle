@@ -13,10 +13,10 @@ public class Partie {
 	
 	public Partie(){
 		boolean vsIA = true;
-		System.out.println("saisir votre nom de Joueur");
+		System.out.println("Saisir votre nom de joueur");
 		Scanner sc = new Scanner(System.in);
 		String nomJoueur1=sc.nextLine();
-		System.out.println("saisir le nom de l'adversaire");
+		System.out.println("Saisir le nom de l'adversaire");
 		Scanner sc1 = new Scanner(System.in);
 		String nomJoueur2=sc1.nextLine();
 		

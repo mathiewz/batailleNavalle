@@ -21,8 +21,10 @@ public class Launcher{
 	}
 
 	private static int menu(){
-		System.out.println("1-jeux");
-		System.out.println("2-credit");
+		System.out.println("\nMENU");
+		System.out.println("====\n");
+		System.out.println("1-Jouer");
+		System.out.println("2-Credits");
 		System.out.println("3-Quitter");
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Veuillez saisir un numéro(1,2,3) :");
@@ -37,12 +39,13 @@ public class Launcher{
 				ret = 0;
 				break;
 			case 2:
-				System.out.println("CREDITS");
+				System.out.println("\nCREDITS");
+				System.out.println("=======\n");
 				System.out.println("Développé par:");
 				System.out.println("LUCAS Mathieu");
 				System.out.println("LE QUERE Ronan");
 				System.out.println("CHEVESSIER Pierrick");
-				System.out.println("DANIEL Steven");
+				System.out.println("DANIEL Steven\n\n");
 				ret = -1;
 				break;
 
