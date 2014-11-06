@@ -10,6 +10,7 @@ public class Partie {
 	private Board bj1;
 	private Board bj2;
 
+	
 	public Partie(){
 		boolean vsIA = true;
 		System.out.println("saisir votre nom de Joueur");
@@ -69,13 +70,19 @@ public class Partie {
 			}
 			else
 			{
-				tir = ((IA)boardEnnemy).tirIA();
+				tir = boardEnnemy.tirIA();
 
 			}
 		}       
 
 		if(tir == Board.CASE_TOUCHE){
 			System.out.println("Un bateau ennemi à été touché  !!");
+			if((boardJoueur instanceof IA))
+			{
+			
+				Board.addCaseTouche();
+			}
+			
 
 		}
 		else if (tir == Board.BATEAU_COULE){
@@ -86,5 +93,6 @@ public class Partie {
 		}
 
 	}
+	
 	
 }

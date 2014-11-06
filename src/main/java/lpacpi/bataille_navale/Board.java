@@ -12,9 +12,9 @@ public class Board {
 	public static int CASE_BATEAU=2;
 	public static int CASE_DANS_EAU=3;
 	public static int CASE_TOUCHE=4;
-
+	public static String coordonnee="";
 	public static int BATEAU_COULE = 9;
-
+	protected ArrayList<String> listCaseToucheIA;
 	protected ArrayList<Bateau> listBateaux;
 
 	public Board()	{
@@ -23,6 +23,7 @@ public class Board {
 				plateau[i][j] = CASE_EAU;
 			}
 		}
+		listCaseToucheIA= new ArrayList<String>();
 		listBateaux = new ArrayList<Bateau>();
 		initialiserBateaux();
 	}
@@ -125,6 +126,7 @@ public class Board {
 	}
 
 	public int tir(String coordonnees){
+		setCoordonnees(coordonnees);
 		System.out.println("tir en "+coordonnees);
 		int[]coordonnee=parseStringCoordonnee(coordonnees);
 		int ret = 0;
@@ -235,7 +237,7 @@ public class Board {
 
 	}
 
-	private static int convertCharToIndex(String coordonnées) {
+	protected static int convertCharToIndex(String coordonnées) {
 		return (int)coordonnées.toUpperCase().charAt(0)-65;
 	}
 	
@@ -266,7 +268,7 @@ public class Board {
 	
 	protected String generateRandomCordonees(){
 		int lower = 0;
-		int higher = 9;
+		int higher = 10;
 		
 		int random1 = (int)(Math.random() * (higher-lower)) + lower;
 		int random2 = (int)(Math.random() * (higher-lower)) + lower;
@@ -275,5 +277,39 @@ public class Board {
 		coordonnees += position[random1];
 		coordonnees += String.valueOf(random2+1);
 		return coordonnees;
+	}
+	public String tirAutourTouche(String c){
+		int[] coordonneeTouche = parseStringCoordonnee(c);
+		int lower = coordonneeTouche[0]-1;
+		int higher = coordonneeTouche[0]+2;
+		
+		int random1 = (int)(Math.random() * (higher-lower)) + lower;
+		String coordonnees ="";
+		String[] position= new String[]{"A","B","C","D","E","F","G","H","I","J"};
+		coordonnees += position[random1];
+		lower= coordonneeTouche[1]-1;
+		higher=coordonneeTouche[1]+2;
+		random1 = (int)(Math.random() * (higher-lower)) + lower;
+		coordonnees += String.valueOf(random1+1);
+		return coordonnees;
+		
+	}
+	public void addCaseTouche(String coordonnees)
+	{
+		listCaseToucheIA.add(coordonnees);
+	}
+	public void removeCaseTouche(String coordonnees)
+	{
+		listCaseToucheIA.remove(listCaseToucheIA.indexOf(coordonnees));
+	}
+	public void setCoordonnees(String coordonnees)
+	
+	{
+		coordonnee=coordonnees;
+	}
+public String getCoordonnees()
+	
+	{
+		return coordonnee;
 	}
 }
