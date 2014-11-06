@@ -12,7 +12,7 @@ public class BoardTest {
 	public void testPlacerBateau() {
 		BoardAuto board = new BoardAuto();
 		try{
-			assertEquals(-1, board.placerBateau(new Bateau(1, "superpos", 0, 0, Board.SENS_HORIZONTAL)));
+			assertEquals(-1, board.placerBateau(new Bateau(1, "Ikea", 0, 0, Board.SENS_HORIZONTAL)));
 			assertEquals(-2, board.placerBateau(new Bateau(6, "FarFarAway", 9, 0, Board.SENS_HORIZONTAL)));
 			assertEquals(-2, board.placerBateau(new Bateau(5, "ForForLointain", 0, 9, Board.SENS_VERTICAL)));
 			assertEquals(0, board.placerBateau(new Bateau(1, "crash test", 4, 5, Board.SENS_HORIZONTAL)));
