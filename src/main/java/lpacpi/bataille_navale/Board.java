@@ -272,7 +272,21 @@ public class Board {
 	}
 
 	public int tirIA(){
-		return tir(generateRandomCordonees());
+		String coordonnees="";
+		if(listCaseToucheIA.isEmpty())
+		{
+		 coordonnees=generateRandomCordonees();
+		}
+		else
+		{
+			String coordonneesDejaTouche = listCaseToucheIA.iterator().next();
+			coordonnees=tirAutourTouche(coordonneesDejaTouche);
+		}
+		int resultatTir= tir(coordonnees);
+		if(resultatTir==CASE_TOUCHE){
+			listCaseToucheIA.add(coordonnees);
+		}
+		return resultatTir;
 	}
 
 	protected String generateRandomCordonees(){
@@ -287,4 +301,27 @@ public class Board {
 		coordonnees += String.valueOf(random2+1);
 		return coordonnees;
 	}
+<<<<<<< HEAD
+=======
+	public String tirAutourTouche(String c){
+		int[] coordonneeTouche = parseStringCoordonnee(c);
+		int[][] tabResultat =new int[][]{
+			new int[]{coordonneeTouche[0]-1, coordonneeTouche[1]}, 
+			new int[]{coordonneeTouche[0]+1, coordonneeTouche[1]}, 
+			new int[]{coordonneeTouche[0], coordonneeTouche[1]-1}, 
+			new int[]{coordonneeTouche[0], coordonneeTouche[1]+1}
+		};
+		//Vider cases pas valides du tableau//
+		
+		String coordonnees ="";
+		String[] position= new String[]{"A","B","C","D","E","F","G","H","I","J"};
+		coordonnees += position[random1];
+		lower= coordonneeTouche[1]-1;
+		higher=coordonneeTouche[1]+2;
+		random1 = (int)(Math.random() * (higher-lower)) + lower;
+		coordonnees += String.valueOf(random1+1);
+		return coordonnees;
+		
+	}
+>>>>>>> 8a2306afc4155932f4155241881b8f630220bd21
 }
