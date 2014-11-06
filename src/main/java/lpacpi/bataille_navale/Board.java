@@ -6,23 +6,12 @@ import java.util.Scanner;
 public class Board {
 	public static final int DIMENSION=10;
 	protected int[][] plateau = new int[DIMENSION][DIMENSION];
-<<<<<<< HEAD
-	public static int SENS_HORIZONTAL=1;
-	public static int SENS_VERTICAL=2;
-	public static int CASE_EAU=1;
-	public static int CASE_BATEAU=2;
-	public static int CASE_DANS_EAU=3;
-	public static int CASE_TOUCHE=4;
-	public static String coordonnee="";
-=======
 	public static final int SENS_HORIZONTAL=1;
 	public static final int SENS_VERTICAL=2;
 	public static final int CASE_EAU=1;
 	public static final int CASE_BATEAU=2;
 	public static final int CASE_DANS_EAU=3;
 	public static final int CASE_TOUCHE=4;
-
->>>>>>> 62982aa54f90e398c56c3160fb4f4b7ce8c46c12
 	public static int BATEAU_COULE = 9;
 	protected ArrayList<String> listCaseToucheIA;
 	protected ArrayList<Bateau> listBateaux;
@@ -136,7 +125,6 @@ public class Board {
 	}
 
 	public int tir(String coordonnees){
-		setCoordonnees(coordonnees);
 		System.out.println("tir en "+coordonnees);
 		int[]coordonnee=parseStringCoordonnee(coordonnees);
 		int ret = 0;
@@ -289,13 +277,7 @@ public class Board {
 
 	protected String generateRandomCordonees(){
 		int lower = 0;
-<<<<<<< HEAD
 		int higher = 10;
-		
-=======
-		int higher = 9;
-
->>>>>>> 62982aa54f90e398c56c3160fb4f4b7ce8c46c12
 		int random1 = (int)(Math.random() * (higher-lower)) + lower;
 		int random2 = (int)(Math.random() * (higher-lower)) + lower;
 		String coordonnees ="";
@@ -319,23 +301,5 @@ public class Board {
 		coordonnees += String.valueOf(random1+1);
 		return coordonnees;
 		
-	}
-	public void addCaseTouche(String coordonnees)
-	{
-		listCaseToucheIA.add(coordonnees);
-	}
-	public void removeCaseTouche(String coordonnees)
-	{
-		listCaseToucheIA.remove(listCaseToucheIA.indexOf(coordonnees));
-	}
-	public void setCoordonnees(String coordonnees)
-	
-	{
-		coordonnee=coordonnees;
-	}
-public String getCoordonnees()
-	
-	{
-		return coordonnee;
 	}
 }

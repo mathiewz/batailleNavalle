@@ -71,18 +71,12 @@ public class Partie {
 			else
 			{
 				tir = boardEnnemy.tirIA();
-
+					
 			}
 		}       
 
 		if(tir == Board.CASE_TOUCHE){
 			System.out.println("Un bateau ennemi à été touché  !!");
-			if((boardJoueur instanceof IA))
-			{
-			
-				Board.addCaseTouche();
-			}
-			
 
 		}
 		else if (tir == Board.BATEAU_COULE){
