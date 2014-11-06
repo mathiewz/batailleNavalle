@@ -4,18 +4,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Board {
-	public static int DIMENSION=10;
+	public static final int DIMENSION=10;
 	protected int[][] plateau = new int[DIMENSION][DIMENSION];
-	public static int SENS_HORIZONTAL=1;
-	public static int SENS_VERTICAL=2;
-	public static int CASE_EAU=1;
-	public static int CASE_BATEAU=2;
-	public static int CASE_DANS_EAU=3;
-	public static int CASE_TOUCHE=4;
+	public static final int SENS_HORIZONTAL=1;
+	public static final int SENS_VERTICAL=2;
+	public static final int CASE_EAU=1;
+	public static final int CASE_BATEAU=2;
+	public static final int CASE_DANS_EAU=3;
+	public static final int CASE_TOUCHE=4;
 
 	public static int BATEAU_COULE = 9;
 
 	protected ArrayList<Bateau> listBateaux;
+	private ArrayList<String> listCaseToucheIA;
 
 	public Board()	{
 		for(int i=0; i<DIMENSION;i++){
@@ -25,12 +26,13 @@ public class Board {
 		}
 		listBateaux = new ArrayList<Bateau>();
 		initialiserBateaux();
+		listCaseToucheIA = new ArrayList<String>();
 	}
 	public int placerBateau(Bateau bateau) throws Exception
 	{
 		int ret = 0;
 		if(bateau.getSens()==SENS_HORIZONTAL){
-			if(bateau.getX()+bateau.GetTaille()<DIMENSION) {
+			if(bateau.getX()+bateau.GetTaille()-1<DIMENSION && bateau.getX() >= 0) {
 				boolean onPeutPlacer = true;
 				for(int n = 0; n < bateau.GetTaille(); n++){
 					if(plateau[bateau.getX()+n][bateau.getY()]==CASE_BATEAU){
@@ -52,7 +54,7 @@ public class Board {
 		}
 
 		if(bateau.getSens()==SENS_VERTICAL){
-			if(bateau.getY()+bateau.GetTaille()<DIMENSION) {
+			if(bateau.getY()+bateau.GetTaille()-1<DIMENSION && bateau.getY() >= 0) {
 				boolean onPeutPlacer = true;
 				for(int n = 0; n < bateau.GetTaille(); n++){
 					if(plateau[bateau.getX()][bateau.getY()+n]==CASE_BATEAU){
@@ -99,7 +101,7 @@ public class Board {
 		ret += "   ------------------- ";
 		return ret;
 	}
-	
+
 	public String afficheEnnemy(){
 		String ret = new String();
 		ret += "Etat du board ennemi\n";
@@ -132,12 +134,12 @@ public class Board {
 			ret = -1;
 		} else {
 			switch(plateau[coordonnee[0]][coordonnee[1]]){
-			case 1:
+			case CASE_EAU:
 				System.out.println("dans l'eau");
 				plateau[coordonnee[0]][coordonnee[1]]=CASE_DANS_EAU;
 				ret = CASE_DANS_EAU;
 				break;
-			case 2:
+			case CASE_BATEAU:
 				plateau[coordonnee[0]][coordonnee[1]]=CASE_TOUCHE;
 				for(Bateau bateau : listBateaux){
 					if(bateau.isThisBateauAtThisPlace(coordonnees)){
@@ -152,12 +154,12 @@ public class Board {
 					}
 				}
 				break;
-			case 3:
+			case CASE_DANS_EAU:
 				System.out.println("case déjà visée");
 				ret = -1;
 				break;
 
-			case 4:
+			case CASE_TOUCHE:
 				System.out.println("case déjà visée");
 				ret = -1;
 				break;
@@ -183,7 +185,7 @@ public class Board {
 		}
 		return ret;
 	}
-	
+
 	public void initialiserBateaux(){
 		try {
 			String[] nomBateau=new String[]{"torpilleur","sous-marin","contre-torpilleur","croiseur","porte-avions"};
@@ -199,18 +201,29 @@ public class Board {
 						err = "";
 						isPLacementValide = false;
 						Scanner sc = new Scanner(System.in);
-						System.out.println("Veuillez saisir coordonnées du "+nomBateau[i]+"(taille:"+dimBateau[i]+") (Lettre = Horizontal, Chiffre = Vertical) :");
+						System.out.println("Veuillez saisir coordonnées du "+nomBateau[i]+"(taille:"+dimBateau[i]+") :");
 						coordonee = Board.parseStringCoordonnee(sc.nextLine());
 						if(coordonee[0] == -1){
 							err += "Les coordonées du bateau ne sont pas valides";
 						} else {
 							sc = new Scanner(System.in);
-							System.out.println("Veuillez saisir sens "+nomBateau[i]+" (horizontal=1 et vertical=2):");
+							System.out.println("Veuillez saisir sens du "+nomBateau[i]+" \n1-haut\n2-bas\n3-gauche\n4-droite");
 							String value = sc.nextLine();
-							if(Board.isNumeric(value)){
-								sens = Integer.valueOf(value);
-								if(sens == 1 || sens ==2){isPLacementValide = true;}
-								else{err += "La saisie du sens n'est pas valide (1 ou 2)\n";}
+							if(isNumeric(value)){
+								int choixSens = Integer.valueOf(value);
+								if(choixSens >= 1 && choixSens <=4){
+									if(choixSens == 1){
+										coordonee[1] -= dimBateau[i]-1;
+										choixSens = 2;
+									}else if(choixSens ==3){
+										coordonee[0] -= dimBateau[i]-1;
+										choixSens = 4;
+									}
+									sens = (choixSens == 2)?SENS_VERTICAL:SENS_HORIZONTAL;
+									isPLacementValide = true;
+								} else {
+									err += "La saisie du sens doit etre un chiffre entre 1 et 4\n";
+								}
 							} else {
 								err += "La saisie du sens n'est pas valide\n";
 							}
@@ -238,18 +251,18 @@ public class Board {
 	private static int convertCharToIndex(String coordonnées) {
 		return (int)coordonnées.toUpperCase().charAt(0)-65;
 	}
-	
+
 	public static boolean isNumeric(String str) {  
-	  try {  
-	    int i = Integer.parseInt(str);  
-	  }
-	  catch(NumberFormatException nfe)  
-	  {  
-	    return false;  
-	  }  
-	  return true;  
+		try {  
+			int i = Integer.parseInt(str);  
+		}
+		catch(NumberFormatException nfe)  
+		{  
+			return false;  
+		}  
+		return true;  
 	}
-	
+
 	public boolean isBoardGameOver(){
 		boolean ret = true;
 		for(Bateau bateau : listBateaux){
@@ -259,15 +272,41 @@ public class Board {
 		}
 		return ret;
 	}
-	
+
 	public int tirIA(){
-		return tir(generateRandomCordonees());
+		String coordonnees = getCoordonneesTirIA();
+		int resultatTir= tir(coordonnees);
+		if(resultatTir==CASE_TOUCHE){
+			listCaseToucheIA.add(coordonnees);
+		} else if(resultatTir==BATEAU_COULE){
+			listCaseToucheIA.remove(listCaseToucheIA.size()-1);
+		}
+		if(resultatTir==-1)
+		{
+			return this.tirIA();
+		}
+		return resultatTir;
 	}
 	
+	private String getCoordonneesTirIA(){
+		String coordonnees="";
+		if(listCaseToucheIA.isEmpty()){
+			coordonnees=generateRandomCordonees();
+		}else{
+			String coordonneesDejaTouche = listCaseToucheIA.get(listCaseToucheIA.size()-1);
+			coordonnees=tirAutourTouche(coordonneesDejaTouche);
+			if(coordonnees.equals("")){
+				listCaseToucheIA.remove(coordonneesDejaTouche);
+				coordonnees = getCoordonneesTirIA();
+			}
+		}
+		return coordonnees;
+	}
+
 	protected String generateRandomCordonees(){
 		int lower = 0;
 		int higher = 9;
-		
+
 		int random1 = (int)(Math.random() * (higher-lower)) + lower;
 		int random2 = (int)(Math.random() * (higher-lower)) + lower;
 		String coordonnees ="";
@@ -275,5 +314,34 @@ public class Board {
 		coordonnees += position[random1];
 		coordonnees += String.valueOf(random2+1);
 		return coordonnees;
+	}
+
+	public String tirAutourTouche(String c){
+		int[] coordonneeTouche = parseStringCoordonnee(c);
+		ArrayList<Integer[]> coordonneePossible = new ArrayList<Integer[]>();
+		coordonneePossible.add(new Integer[]{coordonneeTouche[0]-1, coordonneeTouche[1]});
+		coordonneePossible.add(new Integer[]{coordonneeTouche[0]+1, coordonneeTouche[1]});
+		coordonneePossible.add(new Integer[]{coordonneeTouche[0], coordonneeTouche[1]+1});
+		coordonneePossible.add(new Integer[]{coordonneeTouche[0], coordonneeTouche[1]-1});
+		ArrayList<Integer[]> choixRestant = new ArrayList<Integer[]>();
+		for(Integer[] i : coordonneePossible){
+			if(i[0]>=0 && i[0]< DIMENSION && i[1]>=0 && i[1]< DIMENSION && !(plateau[i[0]][i[1]]==CASE_DANS_EAU) && !(plateau[i[0]][i[1]]==CASE_TOUCHE)){
+				choixRestant.add(i);
+			} 
+		}
+
+		String coordonnees ="";
+
+		if(!choixRestant.isEmpty()){
+			int lower = 0;
+			int higher = choixRestant.size();
+
+			Integer[] i = choixRestant.get((int)(Math.random() * (higher-lower)) + lower);
+			String[] position= new String[]{"A","B","C","D","E","F","G","H","I","J"};
+			coordonnees += position[i[0]];
+			coordonnees += String.valueOf(i[1]+1);
+		}
+		return coordonnees;
+
 	}
 }
