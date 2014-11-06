@@ -199,11 +199,7 @@ public class Board {
 						err = "";
 						isPLacementValide = false;
 						Scanner sc = new Scanner(System.in);
-<<<<<<< HEAD
-						System.out.println("Veuillez saisir coordonnées du "+nomBateau[i]+" :");
-=======
 						System.out.println("Veuillez saisir coordonnées du "+nomBateau[i]+"(taille:"+dimBateau[i]+") (Lettre = Horizontal, Chiffre = Vertical) :");
->>>>>>> e1646054f659456319c7734eab4e99a9faa2db0c
 						coordonee = Board.parseStringCoordonnee(sc.nextLine());
 						if(coordonee[0] == -1){
 							err += "Les coordonées du bateau ne sont pas valides";
