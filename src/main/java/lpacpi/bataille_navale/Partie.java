@@ -34,7 +34,7 @@ public class Partie {
 		if(bj2.isBoardGameOver()){
 			System.out.println("Partie terminée !!!"+nomJoueur1+" à gagné !\n");
 		}else{
-			System.out.println("Partie terminée !!!"+nomJoueur1+" à gagné !\n");
+			System.out.println("Partie terminée !!!"+nomJoueur2+" à gagné !\n");
 		}
 	}
 
