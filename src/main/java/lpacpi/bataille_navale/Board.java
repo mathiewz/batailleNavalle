@@ -134,12 +134,12 @@ public class Board {
 			ret = -1;
 		} else {
 			switch(plateau[coordonnee[0]][coordonnee[1]]){
-			case 1:
+			case CASE_EAU:
 				System.out.println("dans l'eau");
 				plateau[coordonnee[0]][coordonnee[1]]=CASE_DANS_EAU;
 				ret = CASE_DANS_EAU;
 				break;
-			case 2:
+			case CASE_BATEAU:
 				plateau[coordonnee[0]][coordonnee[1]]=CASE_TOUCHE;
 				for(Bateau bateau : listBateaux){
 					if(bateau.isThisBateauAtThisPlace(coordonnees)){
@@ -154,12 +154,12 @@ public class Board {
 					}
 				}
 				break;
-			case 3:
+			case CASE_DANS_EAU:
 				System.out.println("case déjà visée");
 				ret = -1;
 				break;
 
-			case 4:
+			case CASE_TOUCHE:
 				System.out.println("case déjà visée");
 				ret = -1;
 				break;
