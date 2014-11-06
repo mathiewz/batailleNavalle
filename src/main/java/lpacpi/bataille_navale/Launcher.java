@@ -21,8 +21,10 @@ public class Launcher{
 	}
 
 	private static int menu(){
-		System.out.println("1-jeux");
-		System.out.println("2-credit");
+		System.out.println("\nMENU");
+		System.out.println("====\n");
+		System.out.println("1-Jouer");
+		System.out.println("2-Credits");
 		System.out.println("3-Quitter");
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Veuillez saisir un numéro(1,2,3) :");
