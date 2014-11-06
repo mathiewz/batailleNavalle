@@ -37,7 +37,12 @@ public class Launcher{
 				ret = 0;
 				break;
 			case 2:
-				System.out.println("blabla les credits.....");
+				System.out.println("CREDITS");
+				System.out.println("Développé par:");
+				System.out.println("LUCAS Mathieu");
+				System.out.println("LE QUERE Ronan");
+				System.out.println("CHEVESSIER Pierrick");
+				System.out.println("DANIEL Steven");
 				ret = -1;
 				break;
 
