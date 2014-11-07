@@ -1,5 +1,6 @@
 package lpacpi.bataille_navale;
 
+import java.io.Console;
 import java.util.Scanner;
 
 public class Partie {
@@ -7,9 +8,14 @@ public class Partie {
 	protected String nomJoueur1;
 	protected String nomJoueur2;
 
+<<<<<<< HEAD
 	protected Board bj1;
 	protected Board bj2;
 
+=======
+	private Board bj1;
+	private Board bj2;
+>>>>>>> 091968ba32a82ba91d4fbe3b3c8d8582339c276f
 	
 	public Partie(boolean vsIA){
 		System.out.println("Saisir votre nom de joueur");
@@ -18,8 +24,8 @@ public class Partie {
 		System.out.println("Saisir le nom de l'adversaire");
 		Scanner sc1 = new Scanner(System.in);
 		String nomJoueur2=sc1.nextLine();		
-		bj1 = new Board();	
-		if(!vsIA){bj2 = new Board();}
+		bj1 = new Board(nomJoueur1);	
+		if(!vsIA){bj2 = new Board(nomJoueur2);}
 		else{bj2 = new IA();}
 		while(!bj1.isBoardGameOver() && !bj2.isBoardGameOver()){
 			System.out.println("\nA "+nomJoueur1+ " de jouer !!\n================\n\n");
@@ -38,8 +44,13 @@ public class Partie {
 	public Partie(){
 	}
 
+<<<<<<< HEAD
 	
 	protected void tour(Board boardJoueur, Board boardEnnemy, boolean variable){
+=======
+
+	private void tour(Board boardJoueur, Board boardEnnemy, boolean variable){
+>>>>>>> 091968ba32a82ba91d4fbe3b3c8d8582339c276f
 
 		int tir=0;
 		String XY = "";
@@ -72,7 +83,7 @@ public class Partie {
 			else
 			{
 				tir = boardEnnemy.tirIA();
-					
+
 			}
 		}       
 
@@ -87,6 +98,6 @@ public class Partie {
 		}
 
 	}
-	
-	
+
+
 }
