@@ -44,15 +44,15 @@ public class BateauTest {
 		assertEquals(Board.SENS_HORIZONTAL, bateauTestPetit.getSens());
 		assertEquals(Board.SENS_VERTICAL, bateauTestGrand.getSens());
 	}
-	@Test
-	public void testBateauACetEndroit() {
-		Bateau bateauTestPetit = new Bateau(2, "barque", 0, 0, Board.SENS_HORIZONTAL);
-		Bateau bateauTestGrand = new Bateau(5, "paquebot", 3, 3, Board.SENS_VERTICAL);
-		assertTrue(bateauTestPetit.isThisBateauAtThisPlace("a1"));
-		assertFalse(bateauTestPetit.isThisBateauAtThisPlace("d2"));
-		assertTrue(bateauTestGrand.isThisBateauAtThisPlace("d4"));
-		assertFalse(bateauTestGrand.isThisBateauAtThisPlace("a1"));
-	}
+//	@Test
+//	public void testBateauACetEndroit() {
+//		Bateau bateauTestPetit = new Bateau(2, "barque", 0, 0, Board.SENS_HORIZONTAL);
+//		Bateau bateauTestGrand = new Bateau(5, "paquebot", 3, 3, Board.SENS_VERTICAL);
+//		assertTrue(bateauTestPetit.isThisBateauAtThisPlace("a1"));
+//		assertFalse(bateauTestPetit.isThisBateauAtThisPlace("d2"));
+//		assertTrue(bateauTestGrand.isThisBateauAtThisPlace("d4"));
+//		assertFalse(bateauTestGrand.isThisBateauAtThisPlace("a1"));
+//	}
 	@Test
 	public void testVie() {
 		Bateau bateauTestPetit = new Bateau(2, "barque", 0, 0, Board.SENS_HORIZONTAL);
