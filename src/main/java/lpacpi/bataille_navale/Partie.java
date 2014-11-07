@@ -11,9 +11,7 @@ public class Partie {
 	protected Board bj2;
 
 	
-	public Partie(){
-		
-		boolean vsIA = true;
+	public Partie(boolean vsIA){
 		System.out.println("Saisir votre nom de joueur");
 		Scanner sc = new Scanner(System.in);
 		String nomJoueur1=sc.nextLine();
