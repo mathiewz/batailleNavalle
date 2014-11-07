@@ -87,7 +87,7 @@ public class BoardTest {
 			String[] tabStringString = new String[]{"A","B","C","D","E","F","G","H","I","J"};
 			assertTrue(Arrays.binarySearch(tabStringString,str.substring(0, 1))>=0);
 			String[] tabStringInt = new String[]{"1","2","3","4","5","6","7","8","9","10"};
-			assertTrue(Arrays.binarySearch(tabStringInt,str.substring(1))>=0);
+			assertTrue(Arrays.binarySearch(tabStringInt,str.substring(1))>=0||str.substring(1).equals("10"));
 		}
 	}
 }
