@@ -21,6 +21,8 @@ public class Launcher{
 				new Partie(false);
 			}else if(menu == 3){
 				new TimeTrial();
+			}else if(menu == 4){
+				new Partie21();
 			}
 		}
 	}
@@ -30,9 +32,12 @@ public class Launcher{
 		System.out.println("====\n");
 		System.out.println("1-Partie classique (Joueur vs IA)");
 		System.out.println("2-Partie deux joueur");
-		System.out.println("5-Partie Time Trial");
-		System.out.println("3-Credits");
-		System.out.println("4-Quitter");
+		System.out.println("3-Partie Time Trial");
+		System.out.println("4-Partie 21x21");
+		System.out.println("5-Bataille Navalle plus");
+		System.out.println("6-Partie Ennemi Commun");
+		System.out.println("7-Credits");
+		System.out.println("8-Quitter");
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Veuillez saisir un numéro(1,2,3,4) :");
 		int ret = 0;
@@ -49,6 +54,18 @@ public class Launcher{
 				ret = 2;
 				break;
 			case 3:
+				ret = 3;
+				break;
+			case 4:
+				ret = 4;
+				break;
+			case 5:
+				ret = 5;
+				break;
+			case 6:
+				ret = 6;
+				break;
+			case 7:
 				System.out.println("\nCREDITS");
 				System.out.println("=======\n");
 				System.out.println("Développé par:");
@@ -57,13 +74,10 @@ public class Launcher{
 				System.out.println("CHEVESSIER Pierrick");
 				System.out.println("DANIEL Steven\n\n");
 				ret = -1;
-
+				
 				break;
-			case 4:
+			case 8:
 				System.exit(0);
-				break;
-			case 5:
-				ret = 3;
 				break;
 			case 22:	
 				try{
