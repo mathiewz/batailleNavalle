@@ -1,5 +1,6 @@
 package lpacpi.bataille_navale;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -195,9 +196,11 @@ public class Board {
 
 	public void initialiserBateaux(){
 		try {
-			String[] nomBateau=new String[]{"torpilleur","sous-marin","contre-torpilleur","croiseur","porte-avions"};
-			int[] dimBateau=new int[]{2,3,3,4,5};
-			for(int i=0;i<nomBateau.length;i++){
+			String filePath = "./bateaux.txt";
+			Scanner scanner=new Scanner(new File(filePath));
+
+			while (scanner.hasNextLine()) {
+			    String line = scanner.nextLine();
 				boolean isBateauPlace = false;
 				do{
 					boolean isPLacementValide;
@@ -209,22 +212,22 @@ public class Board {
 						isPLacementValide = false;
 						Scanner sc = new Scanner(System.in);
 						
-						System.out.println("Veuillez saisir coordonnées du "+nomBateau[i]+"(taille:"+dimBateau[i]+") :");
+						System.out.println("Veuillez saisir coordonnées du "+line.substring(2)+"(taille:"+line.substring(0,1)+") :");
 						coordonee = Board.parseStringCoordonnee(sc.nextLine());
 						if(coordonee[0] == -1){
 							err += "Les coordonées du bateau ne sont pas valides";
 						} else {
 							sc = new Scanner(System.in);
-							System.out.println("Veuillez saisir sens du "+nomBateau[i]+" \n1-haut\n2-bas\n3-gauche\n4-droite");
+							System.out.println("Veuillez saisir sens du "+line.substring(2)+" \n1-haut\n2-bas\n3-gauche\n4-droite");
 							String value = sc.nextLine();
 							if(isNumeric(value)){
 								int choixSens = Integer.valueOf(value);
 								if(choixSens >= 1 && choixSens <=4){
 									if(choixSens == 1){
-										coordonee[1] -= dimBateau[i]-1;
+										coordonee[1] -= Integer.valueOf(line.substring(0,1))-1;
 										choixSens = 2;
 									}else if(choixSens ==3){
-										coordonee[0] -= dimBateau[i]-1;
+										coordonee[0] -= Integer.valueOf(line.substring(0,1))-1;
 										choixSens = 4;
 									}
 									sens = (choixSens == 2)?SENS_VERTICAL:SENS_HORIZONTAL;
@@ -239,7 +242,7 @@ public class Board {
 						System.out.println(err);
 					}while(!isPLacementValide);
 
-					int placementErr = this.placerBateau(new Bateau(dimBateau[i], nomBateau[i], coordonee[0], coordonee[1], sens));
+					int placementErr = this.placerBateau(new Bateau(Integer.valueOf(line.substring(0,1)), line.substring(2), coordonee[0], coordonee[1], sens));
 					if(placementErr == -1){
 						System.out.println("Case déjà occupée par un autre bateau");
 					} else if(placementErr == -2){
@@ -251,6 +254,7 @@ public class Board {
 				
 				System.out.println(this.afficheAllie());
 			}
+			scanner.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
