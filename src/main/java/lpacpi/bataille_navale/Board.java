@@ -197,6 +197,7 @@ public class Board {
 	public void initialiserBateaux(){
 		try {
 			String[] nomBateau=new String[]{"torpilleur","sous-marin","contre-torpilleur","croiseur","porte-avions"};
+			
 			int[] dimBateau=new int[]{2,3,3,4,5};
 			for(int i=0;i<nomBateau.length;i++){
 				boolean isBateauPlace = false;

@@ -15,8 +15,11 @@ public class Launcher{
 			int menu = -1;
 			while (menu==-1){
 				menu = menu();
-			}
-			new Partie();
+			}if (menu == 1){
+				new Partie(true);
+			}else{
+				new Partie(false);
+			}		
 		}
 	}
 
@@ -34,15 +37,12 @@ public class Launcher{
 		if(Board.isNumeric(valeurClavier))
 		{	
 			int str = Integer.valueOf(valeurClavier);
-
 			switch(str){
-			case 1:
-				
-				ret = 0;
+			case 1:				
+				ret = 1;
 				break;
-			case 2:
-				
-				ret = 0;
+			case 2:			
+				ret = 2;
 				break;
 			case 3:
 				System.out.println("\nCREDITS");
