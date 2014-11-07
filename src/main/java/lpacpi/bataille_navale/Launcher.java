@@ -25,6 +25,8 @@ public class Launcher{
 				new Partie21();
 			}else if(menu == 5){
 				new BatailleNavalePlus();
+			}else if(menu == 6){
+				new EnnemiCommun();
 			}
 		}
 	}
