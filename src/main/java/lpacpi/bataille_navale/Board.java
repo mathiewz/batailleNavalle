@@ -92,7 +92,15 @@ public class Board {
 				} else if(plateau[j][i] == CASE_DANS_EAU){
 					ret += "O";
 				} else if(plateau[j][i] == CASE_TOUCHE){
-					ret += "X";
+					boolean isCoule = false;
+					for(Bateau b : listBateaux){
+						String[] position= new String[]{"A","B","C","D","E","F","G","H","I","J"};
+						String coordonees = position[j];
+						coordonees += String.valueOf(i+1);
+						if(b.isThisBateauAtThisPlace(coordonees) && b.estCoule()){isCoule= true;}
+					}
+					if(isCoule){ret += "+";}
+					else{ret += "X";}
 				}
 				ret+= "|";
 			}
@@ -190,7 +198,7 @@ public class Board {
 		try {
 			String[] nomBateau=new String[]{"torpilleur","sous-marin","contre-torpilleur","croiseur","porte-avions"};
 			int[] dimBateau=new int[]{2,3,3,4,5};
-			for(int i=0;i<5;i++){
+			for(int i=0;i<nomBateau.length;i++){
 				boolean isBateauPlace = false;
 				do{
 					boolean isPLacementValide;
@@ -305,7 +313,7 @@ public class Board {
 
 	protected String generateRandomCordonees(){
 		int lower = 0;
-		int higher = 9;
+		int higher = 10;
 
 		int random1 = (int)(Math.random() * (higher-lower)) + lower;
 		int random2 = (int)(Math.random() * (higher-lower)) + lower;
