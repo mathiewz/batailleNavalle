@@ -208,6 +208,7 @@ public class Board {
 						err = "";
 						isPLacementValide = false;
 						Scanner sc = new Scanner(System.in);
+						
 						System.out.println("Veuillez saisir coordonnées du "+nomBateau[i]+"(taille:"+dimBateau[i]+") :");
 						coordonee = Board.parseStringCoordonnee(sc.nextLine());
 						if(coordonee[0] == -1){
@@ -247,6 +248,8 @@ public class Board {
 						isBateauPlace = true;
 					}
 				}while(!isBateauPlace);
+				
+				System.out.println(this.afficheAllie());
 			}
 		}
 		catch (Exception e) {
