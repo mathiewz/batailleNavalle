@@ -18,8 +18,8 @@ public class Partie {
 		System.out.println("Saisir le nom de l'adversaire");
 		Scanner sc1 = new Scanner(System.in);
 		String nomJoueur2=sc1.nextLine();		
-		bj1 = new Board();	
-		if(!vsIA){bj2 = new Board();}
+		bj1 = new Board(nomJoueur1);	
+		if(!vsIA){bj2 = new Board(nomJoueur2);}
 		else{bj2 = new IA();}
 		while(!bj1.isBoardGameOver() && !bj2.isBoardGameOver()){
 			System.out.println("\nA "+nomJoueur1+ " de jouer !!\n================\n\n");
