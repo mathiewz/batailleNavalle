@@ -38,10 +38,11 @@ public class Launcher{
 		{	
 			int str = Integer.valueOf(valeurClavier);
 			switch(str){
-			case 1:				
+			case 1:
+				
 				ret = 1;
 				break;
-			case 2:			
+			case 2:
 				ret = 2;
 				break;
 			case 3:
