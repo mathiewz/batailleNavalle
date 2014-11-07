@@ -43,7 +43,7 @@ public class Launcher{
 		System.out.println("7-Credits");
 		System.out.println("8-Quitter");
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Veuillez saisir un numéro(1,2,3,4,5,6) :");
+		System.out.println("Veuillez saisir un numéro(1,2,3,4,5,6,7,8) :");
 		int ret = 0;
 		String valeurClavier=sc.nextLine();
 		if(Board.isNumeric(valeurClavier))
