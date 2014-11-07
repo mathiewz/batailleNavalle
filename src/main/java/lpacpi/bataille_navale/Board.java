@@ -223,9 +223,9 @@ public class Board {
 		int[] ret = new int[2];
 		if(coordonnees.length() <= 0){
 			ret[0] = -1;
-		}else if(convertCharToIndex(coordonnees) < 0 || convertCharToIndex(coordonnees) > 9 || !isNumeric(coordonnees.substring(1))){
+		}else if(convertCharToIndex(coordonnees) < 0 || convertCharToIndex(coordonnees) > DIMENSION-1 || !isNumeric(coordonnees.substring(1))){
 			ret[0] = -1;
-		}else if(Integer.valueOf(coordonnees.substring(1))-1 > 9 || Integer.valueOf(coordonnees.substring(1))-1 < 0){
+		}else if(Integer.valueOf(coordonnees.substring(1))-1 > DIMENSION-1 || Integer.valueOf(coordonnees.substring(1))-1 < 0){
 			ret[0] = -1;
 		} else {
 			ret[0] = convertCharToIndex(coordonnees);
