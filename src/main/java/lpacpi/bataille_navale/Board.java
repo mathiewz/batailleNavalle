@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Board {
-	public static final int DIMENSION=10;
+	public static int DIMENSION;
 	protected int[][] plateau = new int[DIMENSION][DIMENSION];
 	public static final int SENS_HORIZONTAL=1;
 	public static final int SENS_VERTICAL=2;
@@ -19,9 +19,13 @@ public class Board {
 	protected ArrayList<Bateau> listBateaux;
 	private ArrayList<String> listCaseToucheIA;
 
-	public Board(){listCaseToucheIA = new ArrayList<String>();}
+	public Board(){
+		DIMENSION = 10;
+		listCaseToucheIA = new ArrayList<String>();
+	}
 	
 	public Board(String nom)	{
+		this();
 		for(int i=0; i<DIMENSION;i++){
 			for(int j=0; j<DIMENSION;j++){
 				plateau[i][j] = CASE_EAU;
@@ -29,8 +33,12 @@ public class Board {
 		}
 		listBateaux = new ArrayList<Bateau>();
 		initialiserBateaux(nom);
-		listCaseToucheIA = new ArrayList<String>();
 	}
+	public Board(int i, String nom) {
+		this(nom);
+		DIMENSION = 21;
+	}
+
 	public int placerBateau(Bateau bateau) throws Exception
 	{
 		int ret = 0;
