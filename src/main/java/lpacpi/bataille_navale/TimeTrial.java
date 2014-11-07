@@ -2,50 +2,38 @@ package lpacpi.bataille_navale;
 
 import java.util.Scanner;
 
-public class Partie {
+public class TimeTrial extends Partie {
 
-	protected String nomJoueur1;
-	protected String nomJoueur2;
+	private int chrono;
 
-	protected Board bj1;
-	protected Board bj2;
-
-	
-	public Partie(boolean vsIA){
+	public TimeTrial(){
 		System.out.println("Saisir votre nom de joueur");
 		Scanner sc = new Scanner(System.in);
 		String nomJoueur1=sc.nextLine();
 		System.out.println("Saisir le nom de l'adversaire");
 		Scanner sc1 = new Scanner(System.in);
-		String nomJoueur2=sc1.nextLine();		
-		bj1 = new Board();	
-		if(!vsIA){bj2 = new Board();}
-		else{bj2 = new IA();}
-		while(!bj1.isBoardGameOver() && !bj2.isBoardGameOver()){
-			System.out.println("\nA "+nomJoueur1+ " de jouer !!\n================\n\n");
+		String nomJoueur2=sc1.nextLine();
+		bj1 = new BoardAuto();
+		bj2 = new IA();
+		chrono=0;
+		while(!bj2.isBoardGameOver() && chrono<60){
+			System.out.println("\nA "+nomJoueur1+ " de jouer !! Tour "+chrono+"/60 \n================\n\n");
 			tour(bj1, bj2,true);
-			if(!bj2.isBoardGameOver()){
-				System.out.println("\nA "+ nomJoueur2+ " de jouer !!\n================\n\n");
-				tour(bj2, bj1,true);
-			}
 		}
 		if(bj2.isBoardGameOver()){
-			System.out.println("Partie terminée !!!"+nomJoueur1+" à gagné !\n");
+			System.out.println("Partie terminée !!!"+nomJoueur1+" à gagné en "+chrono+" tours !\n");
 		}else{
 			System.out.println("Partie terminée !!!"+nomJoueur2+" à gagné !\n");
 		}
 	}
-	public Partie(){
-	}
 
-	
-	protected void tour(Board boardJoueur, Board boardEnnemy, boolean variable){
-
+	@Override
+	protected void tour(Board boardJoueur, Board boardEnnemy, boolean variable) {
+		chrono++;
 		int tir=0;
 		String XY = "";
 		if(!(boardJoueur instanceof IA))
 		{
-			System.out.println(boardJoueur.afficheAllie());
 			System.out.println(boardEnnemy.afficheEnnemy());
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Saisir les coordonnées du tir  ");
@@ -72,7 +60,7 @@ public class Partie {
 			else
 			{
 				tir = boardEnnemy.tirIA();
-					
+
 			}
 		}       
 
@@ -85,8 +73,5 @@ public class Partie {
 				tour(boardJoueur, boardEnnemy,variable);
 			}
 		}
-
 	}
-	
-	
 }

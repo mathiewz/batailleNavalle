@@ -17,8 +17,10 @@ public class Launcher{
 				menu = menu();
 			} if(menu == 1){
 				new Partie(true);
-			}else{
+			}else if(menu == 2){
 				new Partie(false);
+			}else{
+				new TimeTrial();
 			}
 		}
 	}
@@ -26,8 +28,9 @@ public class Launcher{
 	private static int menu(){
 		System.out.println("\nMENU");
 		System.out.println("====\n");
-		System.out.println("1-Partie classique ( joueur vs IA)");
+		System.out.println("1-Partie classique (Joueur vs IA)");
 		System.out.println("2-Partie deux joueur");
+		System.out.println("5-Partie Time Trial");
 		System.out.println("3-Credits");
 		System.out.println("4-Quitter");
 		Scanner sc = new Scanner(System.in);
@@ -40,11 +43,9 @@ public class Launcher{
 
 			switch(str){
 			case 1:
-				
 				ret = 1;
 				break;
 			case 2:
-				
 				ret = 2;
 				break;
 			case 3:
@@ -57,9 +58,11 @@ public class Launcher{
 				System.out.println("DANIEL Steven\n\n");
 				ret = -1;
 				break;
-
 			case 4:
 				System.exit(0);
+				break;
+			case 5:
+				ret = 3;
 				break;
 			default:
 				System.out.println("Saisie non valide");
