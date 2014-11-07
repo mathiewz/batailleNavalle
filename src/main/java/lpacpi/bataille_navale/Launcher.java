@@ -35,10 +35,10 @@ public class Launcher{
 		System.out.println("\nMENU");
 		System.out.println("====\n");
 		System.out.println("1-Partie classique (Joueur vs IA)");
-		System.out.println("2-Partie deux joueur");
+		System.out.println("2-Partie deux joueurs");
 		System.out.println("3-Partie Time Trial");
 		System.out.println("4-Partie 21x21");
-		System.out.println("5-Bataille Navalle plus");
+		System.out.println("5-Bataille Navale plus");
 		System.out.println("6-Partie Ennemi Commun");
 		System.out.println("7-Credits");
 		System.out.println("8-Quitter");
