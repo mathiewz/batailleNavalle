@@ -1,6 +1,8 @@
 package lpacpi.bataille_navale;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class IA extends Board{
@@ -18,9 +20,11 @@ public class IA extends Board{
 
 	public void initialiserBateaux(){
 		try {
-			String[] nomBateau=new String[]{"torpilleur","sous-marin","contre-torpilleur","croiseur","porte-avions"};
-			int[] dimBateau=new int[]{2,3,3,4,5};
-			for(int i=0;i<5;i++){
+			String filePath = "./bateaux.txt";
+			Scanner scanner=new Scanner(new File(filePath));
+
+			while (scanner.hasNextLine()) {
+			    String line = scanner.nextLine();
 				boolean isBateauPlace = false;
 				do{
 					int[] coordonee;
@@ -32,7 +36,7 @@ public class IA extends Board{
 						int higher = 3;
 						sens = (int)(Math.random() * (higher-lower)) + lower;
 					}
-					int placementErr = this.placerBateau(new Bateau(dimBateau[i], nomBateau[i], coordonee[0], coordonee[1], sens));
+					int placementErr = this.placerBateau(new Bateau(Integer.valueOf(line.substring(0,1)), line.substring(2), coordonee[0], coordonee[1], sens));
 					if(placementErr == -1){
 					} else if(placementErr == -2){
 					} else {
@@ -40,6 +44,7 @@ public class IA extends Board{
 					}
 				}while(!isBateauPlace);
 			}
+			scanner.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
