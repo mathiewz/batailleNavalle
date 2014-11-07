@@ -22,6 +22,8 @@ public class Launcher{
 			}else if(menu == 3){
 				new TimeTrial();
 			}else if(menu == 4){
+				new Partie21();
+			}else if(menu == 5){
 				new BatailleNavalePlus();
 			}
 		}
