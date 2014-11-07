@@ -22,9 +22,13 @@ public class Launcher{
 			}else if(menu == 3){
 				new TimeTrial();
 			}else if(menu == 4){
+<<<<<<< HEAD
 				new Partie21();
 			}else if(menu == 6){
 				new EnnemiCommun();
+=======
+				new BatailleNavalePlus();
+>>>>>>> e8fb9bbf361c0920e124e4cf722bc522150c2069
 			}
 		}
 	}

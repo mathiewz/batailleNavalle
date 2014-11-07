@@ -337,7 +337,15 @@ public class Board {
 		}
 		return ret;
 	}
-
+	public int NbBoat(){
+		int nb = 0;
+		for(Bateau bateau : listBateaux){
+			if(!bateau.estCoule()){
+				nb++;
+			}
+		}
+		return nb;
+	}
 	public int tirIA(){
 		String coordonnees = getCoordonneesTirIA();
 		int resultatTir= tir(coordonnees);
