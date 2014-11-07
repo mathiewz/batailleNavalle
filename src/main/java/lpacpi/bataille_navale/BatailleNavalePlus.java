@@ -21,12 +21,10 @@ public class BatailleNavalePlus extends Partie {
 		}
 		if(!bj2.isBoardGameOver()){
 			nbBateau=bj2.NbBoat();
-			for(int j=0; j<nbBateau;j++){
+			for(int i=0; i<nbBateau;i++){
 				System.out.println("\nA "+nomJoueur1+ " de jouer !!\n================\n\n");
-				tour(bj1, bj2,true);
+				tour(bj2, bj1,true);
 				}
-			System.out.println("\nA "+ nomJoueur2+ " de jouer !!\n================\n\n");
-			tour(bj2, bj1,true);
 		}
 	}
 	if(bj2.isBoardGameOver()){
