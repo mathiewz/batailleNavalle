@@ -19,14 +19,16 @@ public class Board {
 	protected ArrayList<Bateau> listBateaux;
 	private ArrayList<String> listCaseToucheIA;
 
-	public Board()	{
+	public Board(){}
+	
+	public Board(String nom)	{
 		for(int i=0; i<DIMENSION;i++){
 			for(int j=0; j<DIMENSION;j++){
 				plateau[i][j] = CASE_EAU;
 			}
 		}
 		listBateaux = new ArrayList<Bateau>();
-		initialiserBateaux();
+		initialiserBateaux(nom);
 		listCaseToucheIA = new ArrayList<String>();
 	}
 	public int placerBateau(Bateau bateau) throws Exception
@@ -194,6 +196,7 @@ public class Board {
 		return ret;
 	}
 
+<<<<<<< HEAD
 	public void initialiserBateaux(){
 		try {
 
@@ -209,57 +212,82 @@ public class Board {
 					int[] coordonee;
 					int sens = -1;
 					String err;
-					do{
-						err = "";
-						isPLacementValide = false;
-						Scanner sc = new Scanner(System.in);
-						
-						System.out.println("Veuillez saisir coordonnées du "+line.substring(2)+"(taille:"+line.substring(0,1)+") :");
-						coordonee = Board.parseStringCoordonnee(sc.nextLine());
-						if(coordonee[0] == -1){
-							err += "Les coordonées du bateau ne sont pas valides";
-						} else {
-							sc = new Scanner(System.in);
-							System.out.println("Veuillez saisir sens du "+line.substring(2)+" \n1-haut\n2-bas\n3-gauche\n4-droite");
-							String value = sc.nextLine();
-							if(isNumeric(value)){
-								int choixSens = Integer.valueOf(value);
-								if(choixSens >= 1 && choixSens <=4){
-									if(choixSens == 1){
-										coordonee[1] -= Integer.valueOf(line.substring(0,1))-1;
-										choixSens = 2;
-									}else if(choixSens ==3){
-										coordonee[0] -= Integer.valueOf(line.substring(0,1))-1;
-										choixSens = 4;
-									}
-									sens = (choixSens == 2)?SENS_VERTICAL:SENS_HORIZONTAL;
-									isPLacementValide = true;
-								} else {
-									err += "La saisie du sens doit etre un chiffre entre 1 et 4\n";
-								}
-							} else {
-								err += "La saisie du sens n'est pas valide\n";
-							}
-						}
-						System.out.println(err);
-					}while(!isPLacementValide);
-
-					int placementErr = this.placerBateau(new Bateau(Integer.valueOf(line.substring(0,1)), line.substring(2), coordonee[0], coordonee[1], sens));
-					if(placementErr == -1){
-						System.out.println("Case déjà occupée par un autre bateau");
-					} else if(placementErr == -2){
-						System.out.println("Le bateau dépasse du plateau");
-					} else {
-						isBateauPlace = true;
-					}
-				}while(!isBateauPlace);
+=======
+	public void initialiserBateaux(String nom){
+		String choix;
+		do{
+		System.out.println(nom+": Placement auto des bateaux (y/n)?");
+		Scanner sc1 = new Scanner(System.in);
+		choix=sc1.nextLine();	
+		}while(!(choix.equalsIgnoreCase("Y")) && !(choix.equalsIgnoreCase("N")));
+		if(choix.equalsIgnoreCase("N")){
+			try {
+				String filePath = "./bateaux.txt";
+				Scanner scanner=new Scanner(new File(filePath));
 				
-				System.out.println(this.afficheAllie());
+				while (scanner.hasNextLine()) {
+					String line = scanner.nextLine();
+					boolean isBateauPlace = false;
+>>>>>>> f156580847ccc2e2d1500073c29d4d96d2c4cedc
+					do{
+						boolean isPLacementValide;
+						int[] coordonee;
+						int sens = -1;
+						String err;
+						do{
+							err = "";
+							isPLacementValide = false;
+							Scanner sc = new Scanner(System.in);
+							
+							System.out.println("Veuillez saisir coordonnées du "+line.substring(2)+"(taille:"+line.substring(0,1)+") :");
+							coordonee = Board.parseStringCoordonnee(sc.nextLine());
+							if(coordonee[0] == -1){
+								err += "Les coordonées du bateau ne sont pas valides";
+							} else {
+								sc = new Scanner(System.in);
+								System.out.println("Veuillez saisir sens du "+line.substring(2)+" \n1-haut\n2-bas\n3-gauche\n4-droite");
+								String value = sc.nextLine();
+								if(isNumeric(value)){
+									int choixSens = Integer.valueOf(value);
+									if(choixSens >= 1 && choixSens <=4){
+										if(choixSens == 1){
+											coordonee[1] -= Integer.valueOf(line.substring(0,1))-1;
+											choixSens = 2;
+										}else if(choixSens ==3){
+											coordonee[0] -= Integer.valueOf(line.substring(0,1))-1;
+											choixSens = 4;
+										}
+										sens = (choixSens == 2)?SENS_VERTICAL:SENS_HORIZONTAL;
+										isPLacementValide = true;
+									} else {
+										err += "La saisie du sens doit etre un chiffre entre 1 et 4\n";
+									}
+								} else {
+									err += "La saisie du sens n'est pas valide\n";
+								}
+							}
+							System.out.println(err);
+						}while(!isPLacementValide);
+						
+						int placementErr = this.placerBateau(new Bateau(Integer.valueOf(line.substring(0,1)), line.substring(2), coordonee[0], coordonee[1], sens));
+						if(placementErr == -1){
+							System.out.println("Case déjà occupée par un autre bateau");
+						} else if(placementErr == -2){
+							System.out.println("Le bateau dépasse du plateau");
+						} else {
+							isBateauPlace = true;
+						}
+					}while(!isBateauPlace);
+					
+					System.out.println(this.afficheAllie());
+				}
+				scanner.close();
 			}
-			scanner.close();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else {
+			placementAutoBateaux();
 		}
 
 	}
@@ -361,5 +389,38 @@ public class Board {
 	private String getCharForNumber(int i) {
 		i++;
 	    return i > 0 && i < 27 ? String.valueOf((char)(i + 64)) : null;
+	}
+	
+	protected void placementAutoBateaux(){
+		try {
+			String filePath = "./bateaux.txt";
+			Scanner scanner=new Scanner(new File(filePath));
+
+			while (scanner.hasNextLine()) {
+			    String line = scanner.nextLine();
+				boolean isBateauPlace = false;
+				do{
+					int[] coordonee;
+					int sens = -1;
+					String err = "";
+					coordonee = Board.parseStringCoordonnee(generateRandomCordonees());
+					if(coordonee[0] != -1){
+						int lower = 1;
+						int higher = 3;
+						sens = (int)(Math.random() * (higher-lower)) + lower;
+					}
+					int placementErr = this.placerBateau(new Bateau(Integer.valueOf(line.substring(0,1)), line.substring(2), coordonee[0], coordonee[1], sens));
+					if(placementErr == -1){
+					} else if(placementErr == -2){
+					} else {
+						isBateauPlace = true;
+					}
+				}while(!isBateauPlace);
+			}
+			scanner.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

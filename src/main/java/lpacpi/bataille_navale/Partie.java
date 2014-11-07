@@ -17,10 +17,16 @@ public class Partie {
 		String nomJoueur1=sc.nextLine();
 		System.out.println("Saisir le nom de l'adversaire");
 		Scanner sc1 = new Scanner(System.in);
+<<<<<<< HEAD
 		String nomJoueur2=sc1.nextLine();	
 		bj1 = new Board();	
 
 		if(!vsIA){bj2 = new Board();}
+=======
+		String nomJoueur2=sc1.nextLine();		
+		bj1 = new Board(nomJoueur1);	
+		if(!vsIA){bj2 = new Board(nomJoueur2);}
+>>>>>>> f156580847ccc2e2d1500073c29d4d96d2c4cedc
 		else{bj2 = new IA();}
 		while(!bj1.isBoardGameOver() && !bj2.isBoardGameOver()){
 			System.out.println("\nA "+nomJoueur1+ " de jouer !!\n================\n\n");

@@ -1,6 +1,6 @@
 package lpacpi.bataille_navale;
 
-import java.util.Random;
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -39,7 +39,7 @@ public class Launcher{
 			int str = Integer.valueOf(valeurClavier);
 			switch(str){
 			case 1:
-				
+
 				ret = 1;
 				break;
 			case 2:
@@ -54,10 +54,30 @@ public class Launcher{
 				System.out.println("CHEVESSIER Pierrick");
 				System.out.println("DANIEL Steven\n\n");
 				ret = -1;
+
 				break;
 
 			case 4:
 				System.exit(0);
+				break;
+			case 22:	
+				try{
+					String filePath = "./boat";
+
+					Scanner scanner=new Scanner(new File(filePath));
+
+
+					while (scanner.hasNextLine()) {
+						String line = scanner.nextLine();
+
+						System.out.println(line);
+
+					}
+					scanner.close();
+				} catch(Exception e){
+					e.printStackTrace();
+				}
+				ret = -1;
 				break;
 			default:
 				System.out.println("Saisie non valide");
