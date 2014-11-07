@@ -23,6 +23,8 @@ public class Launcher{
 				new TimeTrial();
 			}else if(menu == 4){
 				new Partie21();
+			}else if(menu == 6){
+				new EnnemiCommun();
 			}
 		}
 	}
