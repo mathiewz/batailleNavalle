@@ -19,13 +19,9 @@ public class Launcher{
 				new Partie(true);
 			}else if(menu == 2){
 				new Partie(false);
-<<<<<<< HEAD
-			}else{
+			}else if(menu == 3){
 				new TimeTrial();
 			}
-=======
-			}		
->>>>>>> 091968ba32a82ba91d4fbe3b3c8d8582339c276f
 		}
 	}
 
@@ -46,10 +42,7 @@ public class Launcher{
 			int str = Integer.valueOf(valeurClavier);
 			switch(str){
 			case 1:
-<<<<<<< HEAD
-=======
 
->>>>>>> 091968ba32a82ba91d4fbe3b3c8d8582339c276f
 				ret = 1;
 				break;
 			case 2:
@@ -69,10 +62,9 @@ public class Launcher{
 			case 4:
 				System.exit(0);
 				break;
-<<<<<<< HEAD
 			case 5:
 				ret = 3;
-=======
+				break;
 			case 22:	
 				try{
 					String filePath = "./boat";
@@ -91,7 +83,6 @@ public class Launcher{
 					e.printStackTrace();
 				}
 				ret = -1;
->>>>>>> 091968ba32a82ba91d4fbe3b3c8d8582339c276f
 				break;
 			default:
 				System.out.println("Saisie non valide");

@@ -75,7 +75,8 @@ public class BoardTest {
 		BoardAuto board = new BoardAuto();
 		for(int i= 0; i<100;i++){
 			int resultatTir=(board.tirIA());
-			assertTrue(resultatTir==-1||resultatTir==Board.CASE_DANS_EAU||resultatTir==Board.CASE_TOUCHE||resultatTir==Board.BATEAU_COULE);
+			System.out.println(resultatTir);
+			assertTrue(resultatTir==Board.CASE_DANS_EAU||resultatTir==Board.CASE_TOUCHE||resultatTir==Board.BATEAU_COULE);
 		}
 	}
 

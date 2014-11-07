@@ -8,15 +8,9 @@ public class Partie {
 	protected String nomJoueur1;
 	protected String nomJoueur2;
 
-<<<<<<< HEAD
 	protected Board bj1;
 	protected Board bj2;
 
-=======
-	private Board bj1;
-	private Board bj2;
->>>>>>> 091968ba32a82ba91d4fbe3b3c8d8582339c276f
-	
 	public Partie(boolean vsIA){
 		System.out.println("Saisir votre nom de joueur");
 		Scanner sc = new Scanner(System.in);
@@ -44,13 +38,7 @@ public class Partie {
 	public Partie(){
 	}
 
-<<<<<<< HEAD
-	
 	protected void tour(Board boardJoueur, Board boardEnnemy, boolean variable){
-=======
-
-	private void tour(Board boardJoueur, Board boardEnnemy, boolean variable){
->>>>>>> 091968ba32a82ba91d4fbe3b3c8d8582339c276f
 
 		int tir=0;
 		String XY = "";

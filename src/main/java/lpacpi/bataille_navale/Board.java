@@ -19,7 +19,7 @@ public class Board {
 	protected ArrayList<Bateau> listBateaux;
 	private ArrayList<String> listCaseToucheIA;
 
-	public Board(){}
+	public Board(){listCaseToucheIA = new ArrayList<String>();}
 	
 	public Board(String nom)	{
 		for(int i=0; i<DIMENSION;i++){
