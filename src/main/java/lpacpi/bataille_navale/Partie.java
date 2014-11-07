@@ -12,15 +12,15 @@ public class Partie {
 
 	
 	public Partie(){
+		
 		boolean vsIA = true;
 		System.out.println("Saisir votre nom de joueur");
 		Scanner sc = new Scanner(System.in);
 		String nomJoueur1=sc.nextLine();
 		System.out.println("Saisir le nom de l'adversaire");
 		Scanner sc1 = new Scanner(System.in);
-		String nomJoueur2=sc1.nextLine();
-		
-		bj1 = new Board();
+		String nomJoueur2=sc1.nextLine();		
+		bj1 = new Board();	
 		if(!vsIA){bj2 = new Board();}
 		else{bj2 = new IA();}
 		while(!bj1.isBoardGameOver() && !bj2.isBoardGameOver()){
@@ -38,6 +38,7 @@ public class Partie {
 		}
 	}
 
+	
 	private void tour(Board boardJoueur, Board boardEnnemy, boolean variable){
 
 		int tir=0;

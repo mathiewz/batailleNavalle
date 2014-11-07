@@ -23,11 +23,12 @@ public class Launcher{
 	private static int menu(){
 		System.out.println("\nMENU");
 		System.out.println("====\n");
-		System.out.println("1-Jouer");
-		System.out.println("2-Credits");
-		System.out.println("3-Quitter");
+		System.out.println("1-Partie classique ( joueur vs IA)");
+		System.out.println("2-Partie deux joueur");
+		System.out.println("3-Credits");
+		System.out.println("4-Quitter");
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Veuillez saisir un numéro(1,2,3) :");
+		System.out.println("Veuillez saisir un numéro(1,2,3,4) :");
 		int ret = 0;
 		String valeurClavier=sc.nextLine();
 		if(Board.isNumeric(valeurClavier))
@@ -36,9 +37,14 @@ public class Launcher{
 
 			switch(str){
 			case 1:
+				
 				ret = 0;
 				break;
 			case 2:
+				
+				ret = 0;
+				break;
+			case 3:
 				System.out.println("\nCREDITS");
 				System.out.println("=======\n");
 				System.out.println("Développé par:");
@@ -49,7 +55,7 @@ public class Launcher{
 				ret = -1;
 				break;
 
-			case 3:
+			case 4:
 				System.exit(0);
 				break;
 			default:
