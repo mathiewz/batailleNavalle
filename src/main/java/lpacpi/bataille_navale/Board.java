@@ -286,7 +286,7 @@ public class Board {
 		int resultatTir= tir(coordonnees);
 		if(resultatTir==CASE_TOUCHE){
 			listCaseToucheIA.add(coordonnees);
-		} else if(resultatTir==BATEAU_COULE){
+		} else if(resultatTir==BATEAU_COULE && listCaseToucheIA.size()>0){
 			listCaseToucheIA.remove(listCaseToucheIA.size()-1);
 		}
 		if(resultatTir==-1)

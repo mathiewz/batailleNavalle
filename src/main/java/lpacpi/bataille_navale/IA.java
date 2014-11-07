@@ -25,8 +25,7 @@ public class IA extends Board{
 				do{
 					int[] coordonee;
 					int sens = -1;
-					String err;
-					err = "";
+					String err = "";
 					coordonee = Board.parseStringCoordonnee(generateRandomCordonees());
 					if(coordonee[0] != -1){
 						int lower = 1;
