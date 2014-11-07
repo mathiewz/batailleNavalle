@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Board {
 	public static int DIMENSION;
-	protected int[][] plateau = new int[DIMENSION][DIMENSION];
+	protected int[][] plateau;
 	public static final int SENS_HORIZONTAL=1;
 	public static final int SENS_VERTICAL=2;
 	public static final int CASE_EAU=1;
@@ -21,6 +21,7 @@ public class Board {
 
 	public Board(){
 		DIMENSION = 10;
+		plateau = new int[DIMENSION][DIMENSION];
 		listCaseToucheIA = new ArrayList<String>();
 	}
 	
@@ -34,9 +35,16 @@ public class Board {
 		listBateaux = new ArrayList<Bateau>();
 		initialiserBateaux(nom);
 	}
-	public Board(int i, String nom) {
-		this(nom);
-		DIMENSION = 21;
+	public Board(int taille, String nom) {
+		DIMENSION = taille;
+		plateau = new int[DIMENSION][DIMENSION];
+		for(int i=0; i<DIMENSION;i++){
+			for(int j=0; j<DIMENSION;j++){
+				plateau[i][j] = CASE_EAU;
+			}
+		}
+		listBateaux = new ArrayList<Bateau>();
+		initialiserBateaux(nom);
 	}
 
 	public int placerBateau(Bateau bateau) throws Exception
@@ -90,9 +98,17 @@ public class Board {
 	public String afficheAllie(){
 		String ret = new String();
 		ret += "Etat de votre board\n";
-		ret += "   A B C D E F G H I J\n";
+		ret += "   ";
+		for(int i=0; i<DIMENSION; i++){
+			ret += getCharForNumber(i)+" ";
+		}
+		ret += "\n";
 		for(int i=0; i<DIMENSION;i++){
-			ret += "   ------------------- \n"+(i+1);
+			ret += "   ";
+			for(int j=0; j<2*DIMENSION-1;j++){
+				ret += "-";
+			}
+			ret += " \n"+(i+1);
 			if(i<9){ret +=" |";}
 			else{ret +="|";}
 			for(int j=0; j<DIMENSION;j++){
@@ -116,16 +132,27 @@ public class Board {
 			}
 			ret += "\n";
 		}
-		ret += "   ------------------- ";
+		ret += "   ";
+		for(int j=0; j<2*DIMENSION-1;j++){
+			ret += "-";
+		}
 		return ret;
 	}
 
 	public String afficheEnnemy(){
 		String ret = new String();
 		ret += "Etat du board ennemi\n";
-		ret += "   A B C D E F G H I J\n";
+		ret += "   ";
+		for(int i=0; i<DIMENSION; i++){
+			ret += getCharForNumber(i)+" ";
+		}
+		ret += "\n";
 		for(int i=0; i<DIMENSION;i++){
-			ret += "   ------------------- \n"+(i+1);
+			ret += "   ";
+			for(int j=0; j<2*DIMENSION-1;j++){
+				ret += "-";
+			}
+			ret += " \n"+(i+1);
 			if(i<9){ret +=" |";}
 			else{ret +="|";}
 			for(int j=0; j<DIMENSION;j++){
@@ -140,7 +167,10 @@ public class Board {
 			}
 			ret += "\n";
 		}
-		ret += "   ------------------- ";
+		ret += "   ";
+		for(int j=0; j<2*DIMENSION-1;j++){
+			ret += "-";
+		}
 		return ret;
 	}
 
