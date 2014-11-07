@@ -94,8 +94,7 @@ public class Board {
 				} else if(plateau[j][i] == CASE_TOUCHE){
 					boolean isCoule = false;
 					for(Bateau b : listBateaux){
-						String[] position= new String[]{"A","B","C","D","E","F","G","H","I","J"};
-						String coordonees = position[j];
+						String coordonees = getCharForNumber(j);
 						coordonees += String.valueOf(i+1);
 						if(b.isThisBateauAtThisPlace(coordonees) && b.estCoule()){isCoule= true;}
 					}
@@ -318,8 +317,7 @@ public class Board {
 		int random1 = (int)(Math.random() * (higher-lower)) + lower;
 		int random2 = (int)(Math.random() * (higher-lower)) + lower;
 		String coordonnees ="";
-		String[] position= new String[]{"A","B","C","D","E","F","G","H","I","J"};
-		coordonnees += position[random1];
+		coordonnees += getCharForNumber(random1);
 		coordonnees += String.valueOf(random2+1);
 		return coordonnees;
 	}
@@ -345,11 +343,14 @@ public class Board {
 			int higher = choixRestant.size();
 
 			Integer[] i = choixRestant.get((int)(Math.random() * (higher-lower)) + lower);
-			String[] position= new String[]{"A","B","C","D","E","F","G","H","I","J"};
-			coordonnees += position[i[0]];
+			coordonnees += getCharForNumber(i[0]);
 			coordonnees += String.valueOf(i[1]+1);
 		}
 		return coordonnees;
 
+	}
+	private String getCharForNumber(int i) {
+		i++;
+	    return i > 0 && i < 27 ? String.valueOf((char)(i + 64)) : null;
 	}
 }
