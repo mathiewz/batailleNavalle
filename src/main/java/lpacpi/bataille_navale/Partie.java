@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Partie {
 
-	private String nomJoueur1;
-	private String nomJoueur2;
+	protected String nomJoueur1;
+	protected String nomJoueur2;
 
-	private Board bj1;
-	private Board bj2;
+	protected Board bj1;
+	protected Board bj2;
 
 	
 	public Partie(){
@@ -39,7 +39,7 @@ public class Partie {
 	}
 
 	
-	private void tour(Board boardJoueur, Board boardEnnemy, boolean variable){
+	protected void tour(Board boardJoueur, Board boardEnnemy, boolean variable){
 
 		int tir=0;
 		String XY = "";
