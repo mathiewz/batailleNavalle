@@ -15,8 +15,11 @@ public class Launcher{
 			int menu = -1;
 			while (menu==-1){
 				menu = menu();
+			} if(menu == 1){
+				new Partie(true);
+			}else{
+				new Partie(false);
 			}
-			new Partie();
 		}
 	}
 
@@ -38,11 +41,11 @@ public class Launcher{
 			switch(str){
 			case 1:
 				
-				ret = 0;
+				ret = 1;
 				break;
 			case 2:
 				
-				ret = 0;
+				ret = 2;
 				break;
 			case 3:
 				System.out.println("\nCREDITS");
