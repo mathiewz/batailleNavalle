@@ -196,23 +196,7 @@ public class Board {
 		return ret;
 	}
 
-<<<<<<< HEAD
-	public void initialiserBateaux(){
-		try {
 
-			String filePath = "./bateaux.txt";
-			Scanner scanner=new Scanner(new File(filePath));
-
-			while (scanner.hasNextLine()) {
-			    String line = scanner.nextLine();
-
-				boolean isBateauPlace = false;
-				do{
-					boolean isPLacementValide;
-					int[] coordonee;
-					int sens = -1;
-					String err;
-=======
 	public void initialiserBateaux(String nom){
 		String choix;
 		do{
@@ -228,7 +212,6 @@ public class Board {
 				while (scanner.hasNextLine()) {
 					String line = scanner.nextLine();
 					boolean isBateauPlace = false;
->>>>>>> f156580847ccc2e2d1500073c29d4d96d2c4cedc
 					do{
 						boolean isPLacementValide;
 						int[] coordonee;
