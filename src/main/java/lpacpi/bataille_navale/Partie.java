@@ -1,6 +1,5 @@
 package lpacpi.bataille_navale;
 
-import java.io.Console;
 import java.util.Scanner;
 
 public class Partie {
@@ -15,9 +14,11 @@ public class Partie {
 		System.out.println("Saisir votre nom de joueur");
 		Scanner sc = new Scanner(System.in);
 		String nomJoueur1=sc.nextLine();
+		sc.close();
 		System.out.println("Saisir le nom de l'adversaire");
 		Scanner sc1 = new Scanner(System.in);
-		String nomJoueur2=sc1.nextLine();		
+		String nomJoueur2=sc1.nextLine();	
+		sc1.close();
 		bj1 = new Board(nomJoueur1);	
 		if(!vsIA){bj2 = new Board(nomJoueur2);}
 		else{bj2 = new IA();}
@@ -48,9 +49,8 @@ public class Partie {
 			System.out.println(boardEnnemy.afficheEnnemy());
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Saisir les coordonnées du tir  ");
-
 			XY = sc.nextLine();
-
+			sc.close();
 			tir = boardEnnemy.tir(XY); 
 		}
 		else
@@ -65,7 +65,7 @@ public class Partie {
 				System.out.println("Saisir les coordonnées du tir  ");
 				XY = "";
 				XY = sc.nextLine();
-
+				sc.close();
 				tir = boardEnnemy.tir(XY); 
 			}
 			else

@@ -10,9 +10,11 @@ public class TimeTrial extends Partie {
 		System.out.println("Saisir votre nom de joueur");
 		Scanner sc = new Scanner(System.in);
 		String nomJoueur1=sc.nextLine();
+		sc.close();
 		System.out.println("Saisir le nom de l'adversaire");
 		Scanner sc1 = new Scanner(System.in);
 		String nomJoueur2=sc1.nextLine();
+		sc1.close();
 		bj1 = new BoardAuto();
 		bj2 = new IA();
 		chrono=0;
@@ -39,7 +41,7 @@ public class TimeTrial extends Partie {
 			System.out.println("Saisir les coordonnées du tir  ");
 
 			XY = sc.nextLine();
-
+			sc.close();
 			tir = boardEnnemy.tir(XY); 
 		}
 		else
@@ -54,7 +56,7 @@ public class TimeTrial extends Partie {
 				System.out.println("Saisir les coordonnées du tir  ");
 				XY = "";
 				XY = sc.nextLine();
-
+				sc.close();
 				tir = boardEnnemy.tir(XY); 
 			}
 			else

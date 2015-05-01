@@ -240,7 +240,8 @@ public class Board {
 		do{
 		System.out.println(nom+": Placement auto des bateaux (y/n)?");
 		Scanner sc1 = new Scanner(System.in);
-		choix=sc1.nextLine();	
+		choix=sc1.nextLine();
+		sc1.close();
 		}while(!(choix.equalsIgnoreCase("Y")) && !(choix.equalsIgnoreCase("N")));
 		if(choix.equalsIgnoreCase("N")){
 			try {
@@ -265,7 +266,6 @@ public class Board {
 							if(coordonee[0] == -1){
 								err += "Les coordonées du bateau ne sont pas valides";
 							} else {
-								sc = new Scanner(System.in);
 								System.out.println("Veuillez saisir sens du "+line.substring(2)+" \n1-haut\n2-bas\n3-gauche\n4-droite");
 								String value = sc.nextLine();
 								if(isNumeric(value)){
@@ -287,6 +287,7 @@ public class Board {
 									err += "La saisie du sens n'est pas valide\n";
 								}
 							}
+							sc.close();
 							System.out.println(err);
 						}while(!isPLacementValide);
 						
@@ -319,10 +320,8 @@ public class Board {
 
 	public static boolean isNumeric(String str) {  
 		try {  
-			int i = Integer.parseInt(str);  
-		}
-		catch(NumberFormatException nfe)  
-		{  
+			Integer.parseInt(str);  
+		} catch(NumberFormatException nfe){  
 			return false;  
 		}  
 		return true;  
@@ -431,7 +430,6 @@ public class Board {
 				do{
 					int[] coordonee;
 					int sens = -1;
-					String err = "";
 					coordonee = Board.parseStringCoordonnee(generateRandomCordonees());
 					if(coordonee[0] != -1){
 						int lower = 1;

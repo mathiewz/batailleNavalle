@@ -1,8 +1,6 @@
 package lpacpi.bataille_navale;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 public class IA extends Board{

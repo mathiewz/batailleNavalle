@@ -46,6 +46,7 @@ public class Launcher{
 		System.out.println("Veuillez saisir un numéro(1,2,3,4,5,6,7,8) :");
 		int ret = 0;
 		String valeurClavier=sc.nextLine();
+		sc.close();
 		if(Board.isNumeric(valeurClavier))
 		{	
 			int str = Integer.valueOf(valeurClavier);
